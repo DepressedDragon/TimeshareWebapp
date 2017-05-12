@@ -1,17 +1,60 @@
 <head>
   <title>timeshareWebapp</title>
 </head>
-
+<template name = "userRegister">
+<p1>{{>loginButtons}}</p1>
+</template>
 <body>
+<<<<<<< HEAD
   <h1>Welcome to Meteor!</h1>
   <li><a href="page1.html">another page</a></li>
   {{> hello}}
   {{> info}}
+=======
+<h1> Sign up to book here </h1>
+{{loginButtons}}
+>>>>>>> ea4412b2f073a7753eba3836e7f7222e30e2f1ea
 </body>
+<!--
+ {{> ownerRegister}}
+  {{> userRegister}}
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="userRegister">
+<h1> User signup</h1>
+<form class = "userRegister">
+<p1> Enter email <input type="Email" name="userRegisterEmail"></p1>
+<p2> Enter password <input type = "Password" name = "userRegisterPassword"></p2>
+<input type = "Submit" value = "Register">
+</form>
+</template>
+
+<template name="ownerRegister">
+<h2> Owner signup </h2>
+<form class = "ownerRegister">
+<p3> Enter email <input type="Email" name="ownerRegisterEmail"></p3>
+<p4> Enter password <input type = "Password" name = "ownerRegisterPassword"></p4>
+<input type = "Submit" value = "Register">
+</form>
+</template>
+
+
+<template name = "ownerRegister">
+  <h2> Sign up here as an owner </h2>
+  <form id = "owner_input">
+    <p5> <br/><br/>Enter name: <input type="text" name="name" id = "owner_name"> </p5>
+    <p6> Enter email:  <input type="text" name="email" id = "owner_email"> </p6>
+    <p7> Enter password:  <input type="text" name="password" id = "owner_password"><br/><br/></p7>
+    <p8></p8>
+    <input type="submit" value="Enter information"><br/><br/>
+    <button onclick = "owner_check()">Sign up </button>
+    </form>
+</template>
+<template name="register">
+    <form>
+        <input type="email" name="registerEmail">
+        <input type="password" name="registerPassword">
+        <input type="submit" value="Register">
+    </form>
 </template>
 
 <template name="info">
@@ -23,3 +66,4 @@
     <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
   </ul>
 </template>
+-->
