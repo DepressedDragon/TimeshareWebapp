@@ -23,11 +23,23 @@ body {font-family: Verdana,sans-serif;}
 .month .prev {
     float: left;
     padding-top: 10px;
+    display: block;
+    padding: 20px;
+    padding-left: 50px;
+    padding-right:50px;
+    //background:blue;
+
+
 }
 
 .month .next {
     float: right;
     padding-top: 10px;
+    display: block;
+    padding: 20px;
+    padding-left: 50px;
+    padding-right:50px;
+    //background:blue;
 }
 
 .weekdays {
@@ -59,10 +71,11 @@ body {font-family: Verdana,sans-serif;}
     color: #777;
 }
 
-.days li .active {
+.days .active {
     padding: 5px;
     background: #1abc9c;
     color: white !important
+
 }
 
 /* Add media queries for smaller screens */
@@ -77,4 +90,14 @@ body {font-family: Verdana,sans-serif;}
 
 @media screen and (max-width: 290px) {
     .weekdays li, .days li {width: 12.2%;}
+}
+
+.unselectable { /*All class names with 'unselectable' added to them will 
+                  not allow text to be highlighted by the cursor*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

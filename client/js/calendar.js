@@ -1,7 +1,9 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar} from 'meteor/reactive-var';
 
-function range(start, stop, step){ //Emulation of pythons .range() function
+//Emulation of pythons .range() function
+//Accepts [start], stop, [step], returns an array of numbers in that range.
+function range(start, stop, step){ 
 	if (typeof stop == 'undefined'){ //only one parameter passed
 		stop = start;
 		start = 0;
@@ -37,7 +39,6 @@ if (Meteor.isClient == true){
 		'numOfDays': function(){
 			var month = Session.get('month')
 			var numOfDays;
-			//if(month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11){
 			if (month == 3 || month == 5 || month == 8 || month == 10){
 				numOfDays = 30
 			}
@@ -53,7 +54,21 @@ if (Meteor.isClient == true){
 
 			totalDays = range(1, numOfDays + 1) 
 			return totalDays;
-		}
+		},
+
+		'highlightSelectedDateCheck': function(){ //This function is run every time there is a session change, and run individually for each day in the each block
+			var selectedDay = Session.get('selectedDay')		
+			var selectedMonth = Session.get('selectedMonth')
+			var selectedYear = Session.get('selectedYear')
+
+			var thisDay = this //'this' refers to each respective day in the month which is being cyled in the each loop
+			var thisMonth = Session.get('month')
+			var thisYear = Session.get('year')
+			
+			if (thisDay == selectedDay && thisMonth == selectedMonth && thisYear == selectedYear) { //if the current session date is the same as selected, then highlight
+			return "active" //This is a css class reference for styling
+			} 
+		} 
 	})
 
 	Template.calendar.events({
@@ -78,6 +93,19 @@ if (Meteor.isClient == true){
 			else{// else go to next month
 			Session.set('month', Session.get('month') + 1);
 			}			
+		},
+
+		'click .day': function(){ //Selecting a DATE event
+			
+			var selectedDay = Number(this) //Converting object to int
+			var selectedMonth = Session.get('month')
+			var selectedYear = Session.get('year')
+			//Storing selected date information in session variables
+			Session.set('selectedDay', selectedDay)
+			Session.set('selectedMonth', selectedMonth)
+			Session.set('selectedYear', selectedYear)
+
+			console.log("Selected date: " + selectedDay + "/" + selectedMonth + "/" + selectedYear)
 		}
 	})
 
