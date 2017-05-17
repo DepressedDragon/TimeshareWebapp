@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar} from 'meteor/reactive-var';
 
+
 //Emulation of pythons .range() function
 //Accepts [start], stop, [step], returns an array of numbers in that range.
 function range(start, stop, step){ 
@@ -23,11 +24,18 @@ function range(start, stop, step){
 if (Meteor.isClient == true){
 
 	var Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-	Session.set('month', 4); //TODO: some how make this get the current month eventually
+	Session.set('month', 2); //TODO: some how make this get the current month eventually
 	Session.set('year', 2017); //TODO: some how make this the actual date
+
 
 	Template.calendar.helpers({
 		//calendar helper functions go here
+
+		//Not needed as of now, functions as intended without. May be needed in the future.
+		/*'ready': function(){  
+	        return Template.instance().subscriptionsReady();
+	    }, */ 
+
 		'month': function(){
 			var month = Session.get('month')
 			return Months[month]
@@ -56,19 +64,44 @@ if (Meteor.isClient == true){
 			return totalDays;
 		},
 
-		'highlightSelectedDateCheck': function(){ //This function is run every time there is a session change, and run individually for each day in the each block
+		'highlightSelectedDate': function(){ //This function is run every time there is a session change, and run individually for each day in the each block
 			var selectedDay = Session.get('selectedDay')		
 			var selectedMonth = Session.get('selectedMonth')
 			var selectedYear = Session.get('selectedYear')
 
-			var thisDay = this //'this' refers to each respective day in the month which is being cyled in the each loop
+			var thisDay = this //'this' refers to each respective day in the month which is being cycled in the each loop
 			var thisMonth = Session.get('month')
 			var thisYear = Session.get('year')
 			
 			if (thisDay == selectedDay && thisMonth == selectedMonth && thisYear == selectedYear) { //if the current session date is the same as selected, then highlight
-			return "active" //This is a css class reference for styling
+			return "active" //This is a css class reference for styling to make the date look selected.
 			} 
-		} 
+		},
+		
+		'getUnavailableDates': function(){
+			listOfDays = []
+			var bookedDatesCursor = bookedDates.find({month: Session.get('month'), year: Session.get('year') })
+			bookedDatesCursor.forEach( function(doc) {
+				console.log(doc.day)
+				listOfDays.push(doc.day)
+			})
+			Session.set("unavailableDaysList", listOfDays)
+			console.log("done adding items to array, printing array")
+			console.log(Session.get('unavailableDaysList'))
+		},
+
+		'availability': function(){
+			var thisDay = Number(this)
+			var unavailableDaysList = Session.get("unavailableDaysList")
+			//console.log(unavailableDaysList)
+
+			if (unavailableDaysList.indexOf(thisDay) != -1){ //If the array contains this date, its unavailable.
+				//console.log("unavailable!")
+				return "unavailable" //This is css reference
+			}
+			else {/*console.log("available!")*/}
+		}  
+
 	})
 
 	Template.calendar.events({

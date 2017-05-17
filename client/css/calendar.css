@@ -5,7 +5,7 @@ body {font-family: Verdana,sans-serif;}
 .month {
     padding: 70px 25px;
     width: 100%;
-    background: #1abc9c;
+    background: #4f6384;
 }
 
 .month ul {
@@ -56,27 +56,39 @@ body {font-family: Verdana,sans-serif;}
 }
 
 .days {
-    padding: 10px 0;
+    padding: 20px 0;
     background: #eee;
     margin: 0;
 }
 
 .days li {
+    background: #3FBF41;
+    opacity: 0.6;
+    padding: 20px;
     list-style-type: none;
     display: inline-block;
     width: 13.6%;
     text-align: center;
     margin-bottom: 5px;
     font-size:12px;
-    color: #777;
+    color: white;
+}
+
+.days .unavailable {
+    background: #BF3F3F;
+    opacity: 0.6;
+    color: white !important
 }
 
 .days .active {
-    padding: 5px;
-    background: #1abc9c;
+    background: black;
+    opacity:0.6 ;
     color: white !important
+    border-style: solid;
 
 }
+
+
 
 /* Add media queries for smaller screens */
 @media screen and (max-width:720px) {

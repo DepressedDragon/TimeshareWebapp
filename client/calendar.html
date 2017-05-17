@@ -6,9 +6,15 @@
 
 <h1>CSS Calendar</h1>
 
-{{>calendar}}
+{{>calendarPage}}
 
 </body>
+
+<Template name = 'calendarPage'> 
+<p> Welcome to the calendar page!</p>
+{{>calendar}}
+<button type="button"> Book a Stay!</button>
+</Template>
 
 
 <Template name = "calendar">
@@ -35,9 +41,30 @@
 
 
 <ul class="days">
+{{getUnavailableDates}} <!--Calling this only once to build the new array.-->
 {{#each numOfDays}}
-  <li class="day {{highlightSelectedDateCheck}}"> {{this}} </li>
+  <li class="day {{highlightSelectedDate}} {{availability}}"> {{this}} </li> <!-- include an #if statment here?-->
 {{/each}}
 </ul>
-
 </Template>
+
+
+<!-- Explicitly declare all li elements
+29, 30, and 31 should have a display property
+make each date have a highlighted property
+made each date have an availability property
+
+This way, I don't have to reload the entire list everytime there is a selected date change or another change of some kind, only each individual li element-->
+
+
+
+
+<!--Not needed as of now, functions as intended without. May be needed in the future.
+<template name="Loading">
+	{{#if ready}}
+	{{>calendarPage}}
+	{{else}}
+		<p>Loading</p>
+	{{/if}}
+</template> 
+-->
