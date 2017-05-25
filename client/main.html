@@ -1,13 +1,38 @@
 <head>
   <title>timeshareWebapp</title>
 </head>
-<template name = "userRegister">
-<p1>{{>email}}</p1>
+
+<template name = "home">
+<h1> Login here </h1>
+<p1> {{>loginButtons}}</p1>
+    <ul>
+        <li><a href="{{pathFor route='home'}}">Home</a></li>
+        {{#if currentUser}}
+          <li><a href="{{pathFor route='calendar'}}">Calendar</a></li>
+          <li><a href="{{pathFor route='booking'}}">Booking</a></li>
+        {{/if}}
+    </ul>
 </template>
 <body>
-<h1> Sign up to book here *Making some random changes to a file here to show you..now save it*</h1>
-<p2>  {{>loginButtons}}</p2>
 </body>
+
+<template name = "calendar">
+<h2> Calendar </h2>
+    <ul>
+        <li><a href="{{pathFor route='home'}}">Home</a></li>
+        <li><a href="{{pathFor route='calendar'}}">Calendar</a></li>
+        <li><a href="{{pathFor route='booking'}}">Booking</a></li>
+    </ul>
+</template>
+
+<template name = "booking">
+<h3> Book here </h3>
+    <ul>
+        <li><a href="{{pathFor route='home'}}">Home</a></li>
+        <li><a href="{{pathFor route='calendar'}}">Calendar</a></li>
+        <li><a href="{{pathFor route='booking'}}">Booking</a></li>
+    </ul>
+</template>
 <!--
  {{> ownerRegister}}
   {{> userRegister}}

@@ -1,3 +1,9 @@
+Router.route('/calendar');
+Router.route('/home')
+Router.route('/booking')
+
+
+
 /*Template.userRegister.events({
     'submit form': function(event){
         event.preventDefault();
