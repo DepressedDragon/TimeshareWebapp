@@ -74,15 +74,34 @@ body {font-family: Verdana,sans-serif;}
     color: white;
 }
 
-.days .unavailable {
+
+.days .regUnavailable {
     background: #BF3F3F;
+    opacity: 0.6;
+    color: white !important
+}
+
+.days .arrUnavailable {
+    background: #ff7200;
+    opacity: 0.6;
+    color: white !important
+}
+
+.days .depUnavailable {
+    background: #6b3000;
+    opacity: 0.6;
+    color: white !important
+}
+
+.days .duelUnavailable {
+    background: #ff00cb;
     opacity: 0.6;
     color: white !important
 }
 
 .days .active {
     background: black;
-    opacity:0.6 ;
+    opacity:0.6;
     color: white !important
     border-style: solid;
 

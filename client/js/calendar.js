@@ -19,6 +19,14 @@ function range(start, stop, step){
 	return result;
 }
 
+class Day {
+	constructor(day, arr, dep) {
+		this.day = day
+		this.arr = arr
+		this.dep = dep
+	}
+} 
+
 
 //Code runs on client only
 if (Meteor.isClient == true){
@@ -79,28 +87,59 @@ if (Meteor.isClient == true){
 		},
 		
 		'getUnavailableDates': function(){
-			listOfDays = []
-			var bookedDatesCursor = bookedDates.find({month: Session.get('month'), year: Session.get('year') })
-			bookedDatesCursor.forEach( function(doc) {
+			listOfDayObjects = []
+			count = 0
+			
+			var bookedDatesCursor = bookedDates.find({month: Session.get('month'), year: Session.get('year') }) //Retrieve all days with this 'month' and this 'year'
+			bookedDatesCursor.forEach( function(doc) {    //Looping over cursor and placing each day in the array
 				console.log(doc.day)
-				listOfDays.push(doc.day)
+				listOfDayObjects[count] = new Day(doc.day, doc.arr, doc.dep) //Creating a new day objects and storing in array
+				count += 1
 			})
-			Session.set("unavailableDaysList", listOfDays)
+			Session.set("unavailableDaysList", listOfDayObjects)
 			console.log("done adding items to array, printing array")
 			console.log(Session.get('unavailableDaysList'))
+
+			//In the forEach block, running each 'day' through class factory to give it the .arr or .dep boolean values.
+
 		},
 
 		'availability': function(){
 			var thisDay = Number(this)
 			var unavailableDaysList = Session.get("unavailableDaysList")
 			//console.log(unavailableDaysList)
-
-			if (unavailableDaysList.indexOf(thisDay) != -1){ //If the array contains this date, its unavailable.
-				//console.log("unavailable!")
-				return "unavailable" //This is css reference
+			
+			//Searches an array for a specific object by an object property
+			//Accepts an array of objects and an object property to search for, returns 1 object.
+			function getByValue(arr, value) {
+			  	for (var i=0, iLen=arr.length; i<iLen; i++) {
+			    	if (arr[i].day == value) return arr[i];
+			  	}
 			}
-			else {/*console.log("available!")*/}
+			
+			var bookedDay = getByValue(unavailableDaysList, thisDay)
+
+			if (bookedDay != undefined) { //if this day is indeed booked (bookedDay will be undefined if its not booked and will not run)
+	   			if (bookedDay.day == thisDay) { 
+
+	   				if (bookedDay.arr == true) {
+	   					return "arrUnavailable" //This is an arrival date!
+	   				}
+	   				else if (bookedDay.dep == true) {
+	   					return "depUnavailable" //This is a departure date!
+	   				} 
+	   				else if (bookedDay.arr == true && bookedDay.dep == true) { 
+	   					return "duelUnavailable"//This is both an arrival and departure date! Double booked! (either a dep and arr on same day by different people, or one person... TODO: figure out how to handle this)
+	   				} 
+	   				else { 
+	   					return "regUnavailable" //This is a regular 'inbetween' booked Date
+	   				} 
+				}
+				else {/*console.log("available!")*/}
+			}
 		}  
+
+
 
 	})
 
