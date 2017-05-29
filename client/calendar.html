@@ -8,9 +8,10 @@
 
 {{>calendarPage}}
 
+	end of calendar page!
 </body>
 
-<Template name = 'calendarPage'> 
+<template name = 'calendarPage'> 
 <p> Welcome to the calendar page!</p>
 {{>calendar}}
 <button type="button"> Book a Stay!</button>
@@ -30,23 +31,23 @@
   </div>
 
   <ul class="weekdays unselectable">
+    <li>Su</li>
     <li>Mo</li>
     <li>Tu</li>
     <li>We</li>
     <li>Th</li>
     <li>Fr</li>
     <li>Sa</li>
-    <li>Su</li>
   </ul>
 
 
 <ul class="days">
 {{getUnavailableDates}} <!--Calling this only once to build the new array.-->
 {{#each numOfDays}}
-  <li class="day {{highlightSelectedDate}} {{availability}}"> {{this}} </li> 
+  <li class="day {{spacer}} {{today}} {{highlightSelectedDate}} {{availability}}"> {{this}} </li> 
 {{/each}}
 </ul>
-</Template>
+</template>
 
 
 <!-- Explicitly declare all li elements

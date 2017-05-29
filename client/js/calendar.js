@@ -19,6 +19,25 @@ function range(start, stop, step){
 	return result;
 }
 
+//Function to get the total days for any given month
+//Accepts a month (int 0-11) and a year, returns total amount of days as an int
+function getDays (month, year) {
+	if (month == 3 || month == 5 || month == 8 || month == 10){
+			numOfDays = 30
+		}
+	else if (month == 1){ //February calculation
+		if (year % 100 == 0 && year % 400 == 0){numOfDays = 29} //century leap year
+		else if (year % 4 == 0){numOfDays = 29} //regular leap year
+		else{numOfDays = 28}
+	} 
+	else{
+		numOfDays = 31
+	}
+	return numOfDays;
+
+}
+
+//Creates day objects to check for arr and dep dates
 class Day {
 	constructor(day, arr, dep) {
 		this.day = day
@@ -31,10 +50,12 @@ class Day {
 //Code runs on client only
 if (Meteor.isClient == true){
 
+	//Setup
 	var Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-	Session.set('month', 2); //TODO: some how make this get the current month eventually
-	Session.set('year', 2017); //TODO: some how make this the actual date
-
+	var todaysDate = new Date() //This is the current date. 
+	console.log("Today is: " + todaysDate)
+	Session.set('month', todaysDate.getMonth());
+	Session.set('year', todaysDate.getFullYear()); 
 
 	Template.calendar.helpers({
 		//calendar helper functions go here
@@ -53,23 +74,35 @@ if (Meteor.isClient == true){
 			return year;
 		},
 		'numOfDays': function(){
-			var month = Session.get('month')
-			var numOfDays;
-			if (month == 3 || month == 5 || month == 8 || month == 10){
-				numOfDays = 30
-			}
-			else if (month == 1){ //February calculation
-				var year = Session.get('year')
-				if (year % 100 == 0 && year % 400 == 0){numOfDays = 29} //century leap year
-				else if (year % 4 == 0){numOfDays = 29} //regular leap year
-				else{numOfDays = 28}
-			} 
-			else{
-				numOfDays = 31
-			}
+			var numOfDays = getDays(Session.get('month'), Session.get('year')) //Getting number of days for this month
+			totalDays = range(1, numOfDays + 1) //Creating a list of these days
+			
+			var firstDate = new Date(Session.get('year'), Session.get('month'), 1) //Getting a new date, the first of this month
+			var firstDay = firstDate.getDay() //Getting the day value for this date (mo,tu,wed, etc)
 
-			totalDays = range(1, numOfDays + 1) 
+			for (i = 0; i <= 6; i++) {	
+				if (i == firstDay) {
+					//insert correct number of placements
+					numberOfInserts = firstDay - 1
+					for (j = 0; j <= numberOfInserts; j++ )
+					totalDays.unshift('p')
+				}
+			}  
+
 			return totalDays;
+		},
+
+		'spacer': function(){ //if this is a placeholder, return 'spider' css class which hides the date
+			if (this == 'p') { 
+				return 'spacer'
+			}
+		},
+
+		'today': function(){ //if this date is todays date, highlight it slightly differently.
+			var thisDay = Number(this)
+			if (Number(this) == todaysDate.getDate() && Session.get('month') == todaysDate.getMonth() && Session.get('year') == todaysDate.getFullYear()) {
+				return 'today'
+			} 
 		},
 
 		'highlightSelectedDate': function(){ //This function is run every time there is a session change, and run individually for each day in the each block
@@ -97,8 +130,8 @@ if (Meteor.isClient == true){
 				count += 1
 			})
 			Session.set("unavailableDaysList", listOfDayObjects)
-			console.log("done adding items to array, printing array")
-			console.log(Session.get('unavailableDaysList'))
+			//#console.log("done adding items to array, printing array")
+			//#console.log(Session.get('unavailableDaysList'))
 
 			//In the forEach block, running each 'day' through class factory to give it the .arr or .dep boolean values.
 
@@ -146,6 +179,7 @@ if (Meteor.isClient == true){
 	Template.calendar.events({
 		//calendar events go here
 		'click .prev': function(){
+			
 			month = Session.get('month')
 			if (month == 0){ //if jan, go to last years dec, not -1 month.
 				Session.set('year', Session.get('year') - 1)
@@ -153,10 +187,12 @@ if (Meteor.isClient == true){
 			}
 			else{ //else go to last month
 			Session.set('month', Session.get('month') - 1);
-			}
+			} 
+
 		},
 
 		'click .next': function(){
+			
 			month = Session.get('month')
 			if (month == 11){ //if dec, go to next years jan, not 13th month. 
 				Session.set('year', Session.get('year') + 1)
@@ -164,7 +200,8 @@ if (Meteor.isClient == true){
 			}
 			else{// else go to next month
 			Session.set('month', Session.get('month') + 1);
-			}			
+			} 
+	
 		},
 
 		'click .day': function(){ //Selecting a DATE event
@@ -176,6 +213,7 @@ if (Meteor.isClient == true){
 			Session.set('selectedDay', selectedDay)
 			Session.set('selectedMonth', selectedMonth)
 			Session.set('selectedYear', selectedYear)
+			//Session.set('selectedDate', selectedDay-selectedMonth-selectedYear)
 
 			console.log("Selected date: " + selectedDay + "/" + selectedMonth + "/" + selectedYear)
 		}

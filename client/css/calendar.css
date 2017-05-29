@@ -73,7 +73,14 @@ body {font-family: Verdana,sans-serif;}
     font-size:12px;
     color: white;
 }
+.days .today {
+    opacity: 1;
+}
 
+.days .spacer {
+    opacity: 0;
+
+}
 
 .days .regUnavailable {
     background: #BF3F3F;
