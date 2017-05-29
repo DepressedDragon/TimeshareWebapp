@@ -1,6 +1,7 @@
 Router.route('/calendar');
-Router.route('/home')
-Router.route('/booking')
+Router.route('/home');
+Router.route('/booking');
+Router.route('/');
 
 
 
