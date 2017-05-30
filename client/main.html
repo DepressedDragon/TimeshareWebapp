@@ -20,8 +20,7 @@
 <h2> Calendar </h2>
     <ul>
         <li><a href="{{pathFor route='home'}}">Home</a></li>
-        <li><a href="{{pathFor route='calendar'}}">Calendar</a></li>
-        <li><a href="{{pathFor route='booking'}}">Booking</a></li>
+        <li><a href="{{pathFor route= 'booking'}}">Booking</a></li>
     </ul>
 </template>
 
@@ -30,8 +29,85 @@
     <ul>
         <li><a href="{{pathFor route='home'}}">Home</a></li>
         <li><a href="{{pathFor route='calendar'}}">Calendar</a></li>
-        <li><a href="{{pathFor route='booking'}}">Booking</a></li>
+        <li><a href="{{pathFor route='payment'}}">Payment</a></li>
     </ul>
+</template>
+
+<template name = "payment">
+
+  <ul>
+        <li><a href="{{pathFor route='home'}}">Home</a></li>
+        <li><a href="{{pathFor route='calendar'}}">Calendar</a></li>
+        <li><a href="{{pathFor route='payment'}}">Payment</a></li>
+    </ul>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="panel-body">
+            <form class="payment-form">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="cardNumber">CARD NUMBER</label>
+                            <input
+                                type="tel"
+                                class="form-control"
+                                name="cardNumber"
+                                placeholder="Valid Card Number"
+                                autocomplete="cc-number"
+                                required autofocus
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 col-md-3">
+                        <div class="form-group">
+                            <label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
+                            <input
+                                type="tel"
+                                class="form-control"
+                                name="cardExpiryMM"
+                                placeholder="MM"
+                                autocomplete="cc-exp"
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-md-3">
+                        <div class="form-group">
+                            <label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
+                            <input
+                                type="tel"
+                                class="form-control"
+                                name="cardExpiryYY"
+                                placeholder="YY"
+                                autocomplete="cc-exp"
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div class="col-xs-5 col-md-5 pull-right">
+                        <div class="form-group">
+                            <label for="cardCVC">CV CODE</label>
+                            <input
+                                type="tel"
+                                class="form-control"
+                                name="cardCVC"
+                                placeholder="CVC"
+                                autocomplete="cc-csc"
+                                required
+                            />
+                        </div>
+                    </div>
+                </div>
+                <input type="submit">
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <!--
  {{> ownerRegister}}
