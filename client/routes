@@ -1,0 +1,25 @@
+Router.route('/', function () {
+  this.render('', {
+    data: function () { return Items.findOne({_id: this.params._id}); }
+  });
+});
+Router.route('/home', function () {
+  this.render('home', {
+    data: function () { return Items.findOne({_id: this.params._id}); }
+  });
+});
+Router.route('/calendar', function () {
+  this.render('calendar', {
+    data: function () { return Items.findOne({_id: this.params._id}); }
+  });
+});
+Router.route('/booking', function () {
+  this.render('booking', {
+    data: function () { return Items.findOne({_id: this.params._id}); }
+  });
+});
+Router.route('/payment', function () {
+  this.render('payment', {
+    data: function () { return Items.findOne({_id: this.params._id}); }
+  });
+});
