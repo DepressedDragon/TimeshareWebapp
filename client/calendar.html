@@ -14,8 +14,9 @@
 <template name = 'calendarPage'> 
 <p> Welcome to the calendar page!</p>
 {{>calendar}}
-<button type="button"> Book a Stay!</button>
+<button type="button" class="book"> Book a Stay!</button>
 </Template>
+
 
 
 <Template name = "calendar">
@@ -40,13 +41,26 @@
     <li>Sa</li>
   </ul>
 
+{{#unless isSelectable}} <!--is false: -->
+	
+	<ul class="days">
+	{{getUnavailableDates}} <!--Calling this only once to build the new array.-->
+	{{#each numOfDays}}
+	  <li class="day {{spacer}} {{today}} {{availability}}"> {{this}} </li> 
+	{{/each}}
+	</ul>
 
-<ul class="days">
-{{getUnavailableDates}} <!--Calling this only once to build the new array.-->
-{{#each numOfDays}}
-  <li class="day {{spacer}} {{today}} {{highlightSelectedDate}} {{availability}}"> {{this}} </li> 
-{{/each}}
-</ul>
+{{else}}
+	
+	<ul class="days">
+	{{getUnavailableDates}} <!--Calling this only once to build the new array.-->
+	{{#each numOfDays}}
+	  <li class="day {{spacer}} {{today}} {{highlightSelectedDate}} {{availability}}"> {{this}} </li> 
+	{{/each}}
+	</ul>
+
+{{/unless}}
+
 </template>
 
 
