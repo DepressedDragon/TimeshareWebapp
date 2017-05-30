@@ -4,6 +4,7 @@ Router.route('/booking');
 Router.route('/');
 Router.route('/payment')
 /*
+
 if (Meteor.isClient){
 	Meteor.startup(function(){
 		Stripe.setPublishableKey(Meteor.settings.public.StripePub);
@@ -35,6 +36,7 @@ if (Meteor.isServer){
 }
 
 */
+
 if (Meteor.isClient) {
   Meteor.startup(function(){
     Stripe.setPublishableKey(Meteor.settings.public.StripePub);
@@ -90,8 +92,8 @@ if (Meteor.isServer) {
   })
 }
 
-
-/*Template.userRegister.events({
+/*
+Template.userRegister.events({
     'submit form': function(event){
         event.preventDefault();
         var emailVar = event.target.userRegisterEmail.value;
