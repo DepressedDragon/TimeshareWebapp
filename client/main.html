@@ -33,8 +33,30 @@
     </ul>
 </template>
 
-<template name = "payment">
+<template name="payment">
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <img width="350" src="http://i.huffpost.com/gen/4317942/images/o-COTTAGE-BASEMENT-RENOVATION-facebook.jpg" alt="Cottage">
+      {{#unless processing}}
+        <p class="alert alert-info">Book here:</p>
 
+        <ul class="list-group price-list">
+          <li class="list-group-item clearfix">
+            <p class="pull-left"><strong>$200</strong> &mdash; Two night stay</p>
+            <a href="#" data-service="full-roaming-vapor" class="btn btn-success pull-right">Buy Now</a>
+          </li>
+        </ul>
+
+        <p class="alert alert-warning">To demo, use any email address along with the card number <strong>4242 4242 4242 4242</strong>, any <em>future</em> expiration date, and any 3 digit security code (e.g 555)</p>
+      {{else}}
+        <p class="alert alert-warning"><i class="fa fa-refresh fa-spin"></i> Processing payment...</p>
+      {{/unless}}
+    </div>
+  </div>
+</template>
+
+
+<!--
   <ul>
         <li><a href="{{pathFor route='home'}}">Home</a></li>
         <li><a href="{{pathFor route='calendar'}}">Calendar</a></li>
@@ -109,7 +131,7 @@
     </div>
   </div>
 </template>
-<!--
+
  {{> ownerRegister}}
   {{> userRegister}}
 

@@ -3,6 +3,58 @@ Router.route('/home');
 Router.route('/booking');
 Router.route('/');
 Router.route('/payment')
+
+
+
+Template.payment.onCreated(() => {
+  let template = Template.instance();
+  template.selectedService = new ReactiveVar( false )
+  template.processing = new ReactiveVar( false );
+  template.checkout = StripeCheckout.configure({
+    key: Meteor.settings.public.stripe,
+    image: 'http://i.huffpost.com/gen/4317942/images/o-COTTAGE-BASEMENT-RENOVATION-facebook.jpg',
+    locale: 'auto'
+    token(token){
+       let service = template.selectedService.get(),
+          charge  = {
+            amount: token.amount || service.amount,
+            currency: token.currency || 'cad',
+            source: token.id,
+            description: token.description || service.description,
+            receipt_email: token.email
+          };
+    };
+  });
+});
+
+Template.payment.helpers({
+  processing() {
+    return Template.instance().processing.get();
+  }
+});
+
+Template.payment.events({
+    'click [data-service]' ( event, template ) {
+    const pricing = {
+      'Rental': {
+        amount: 300000,
+        description: "Two day rental"
+
+    let service = pricing[ event.target.dataset.service ];
+
+    template.selectedService.set( service );
+    template.processing.set( true );
+
+    template.checkout.open({
+      name: 'Cottage rental',
+      description: service.description,
+      amount: service.amount,
+      bitcoin: true
+    });
+  }
+})
+
+
 /*
 
 if (Meteor.isClient){
@@ -35,7 +87,7 @@ if (Meteor.isServer){
 
 }
 
-*/
+
 
 if (Meteor.isClient) {
   Meteor.startup(function(){
@@ -92,50 +144,4 @@ if (Meteor.isServer) {
   })
 }
 
-/*
-Template.userRegister.events({
-    'submit form': function(event){
-        event.preventDefault();
-        var emailVar = event.target.userRegisterEmail.value;
-        var passwordVar = event.target.userRegisterPassword.value;
-        console.log("Form submitted.");
-    }
-});
-Template.ownerRegister.events({
-    'submit form': function(event){
-        event.preventDefault();
-        var ownerEmailVar = event.target.ownerRegisterEmail.value;
-        var ownerPasswordVar = event.target.ownerRegisterPassword.value;
-        console.log("Form submitted")
-    }
-});
-
-
-
-Template.userCheck.helpers({
-	"user_check" : function(){
-		var x = document.getElementById("user_input");
-		var henry = "";
-		var length = henry.length;
-		if (length > 1){
-			return "Greater than 1" + user_name;
-		}
-		else{
-			return "Fake";
-		}
-	}
-});
-
-Template.ownerCheck.helpers({
-	"owner_check" : function(){
-		var joey = "Joeysname"
-		if (joey.length > 0){
-			return "greater"
-		}
-		else {
-			return "lesser" + owner_name
-		}
-	}
-
-});
 */
