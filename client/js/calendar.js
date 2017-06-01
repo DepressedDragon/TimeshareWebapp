@@ -58,10 +58,15 @@ Session.set('year', todaysDate.getFullYear());
 
 var isSelectable = new ReactiveVar(false); //making selectability false to start
 
-Template.calendarPage.events({
+Template.calendarPage.helpers({
+	'stopSelectable': function(){
+		isSelectable = false;
+	}
+})
 
-	'click .book': function(){
-		isSelectable = true;
+Template.bookingPage.helpers({
+	'makeSelectable': function(){
+		isSelectable = true;	
 	}
 })
 
@@ -94,7 +99,7 @@ Template.calendar.helpers({
 
 		for (i = 0; i <= 6; i++) {	
 			if (i == firstDay) {
-				//insert correct number of placements
+				//insert correct number of placeholders to push the 1st to land on the correct week day
 				numberOfInserts = firstDay - 1
 				for (j = 0; j <= numberOfInserts; j++ )
 				totalDays.unshift('p')
@@ -104,7 +109,7 @@ Template.calendar.helpers({
 		return totalDays;
 	},
 
-	'spacer': function(){ //if this is a placeholder, return 'spider' css class which hides the date
+	'spacer': function(){ //if this is a placeholder, return 'spacer' css class which hides the date
 		if (this == 'p') { 
 			return 'spacer'
 		}

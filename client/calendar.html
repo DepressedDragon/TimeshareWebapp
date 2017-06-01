@@ -1,22 +1,28 @@
 <head>
     <title>Calendar Page</title>
 </head>
-
 <body>
-
-<h1>CSS Calendar</h1>
-
-{{>calendarPage}}
-
-	end of calendar page!
+<a href="/">Home</a>
+<a href="/calendar">Calendar</a>
 </body>
+
+
+
 
 <template name = 'calendarPage'> 
 <p> Welcome to the calendar page!</p>
+{{stopSelectable}} <!--Ensuring the calendar is not selectable on this page since it should be relatively static; view only. -->
 {{>calendar}}
-<button type="button" class="book"> Book a Stay!</button>
+<button type="button" class="book"><a href='/booking'>Book a Stay!</a></button> <!--Make this button link to --> 
 </Template>
 
+
+<template name = 'bookingPage'>
+<p> Welcome to the booking page!</p>
+{{makeSelectable}}
+{{>calendar}} <!-- same calendar, but isSelectable state is now true -->
+<!-- Booking information layout goes here! --> 
+</template>
 
 
 <Template name = "calendar">
@@ -41,7 +47,7 @@
     <li>Sa</li>
   </ul>
 
-{{#unless isSelectable}} <!--is false: -->
+{{#unless isSelectable}} <!--is false: (#unless is simply the inverse of #if) -->
 	
 	<ul class="days">
 	{{getUnavailableDates}} <!--Calling this only once to build the new array.-->
