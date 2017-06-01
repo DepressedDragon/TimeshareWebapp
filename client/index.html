@@ -13,6 +13,7 @@
 
 
 <template name = "layout ">
+	<!-- Page Layout for entire webapp *see lib/routes.js* -->
 	{{>fixedNavbar}}
 		{{>yield}} <!-- iron:router inserts each page's respective template here --> 
 	{{>footer}}
@@ -39,6 +40,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="/">HOME</a></li>
             <li><a href="/about">ABOUT</a></li>
+            {{#if currentUser}} <!-- Only displays 'calendar' if the user is logged in-->
             <li><a href="/calendar">CALENDAR</a></li>
             {{/if}}
             <li><a>{{>loginButtons}}</a></li>
