@@ -1,4 +1,0 @@
-Router.route('/home')
-Router.route('/calendar')
-Router.route('/booking')
-Router.route('/')
