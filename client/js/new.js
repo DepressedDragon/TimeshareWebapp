@@ -4,7 +4,6 @@ Router.route('/booking');
 Router.route('/');
 Router.route('/payment');
 
-
 if (Meteor.isClient) {
   Template.payment.events({
     'click button': function(e) {
@@ -12,7 +11,7 @@ if (Meteor.isClient) {
 
       StripeCheckout.open({
         key: 'pk_test_dYxemQdfb6WJxKWHakXhYPBV',
-        amount: 5000, // this is equivalent to $50
+        amount: 50, // this is equivalent to $50
         name: 'Timeshare booking',
         description: 'Three nights - $120',
         panelLabel: 'Book now!',
@@ -34,16 +33,12 @@ if (Meteor.isServer) {
 
       Stripe.charges.create({
         source: stripeToken,
-        amount: 5000, // this is equivalent to $50
+        amount: 50, // this is equivalent to $50
         currency: 'cad'
       }, function(err, charge) {
-        if (err){
-          throw new Meteor.error(500, "stripeError", err.message)
-          console.log(err);
-        }
-        else
-          return(result)
+        console.log(err, charge);
       });
     }
   });
 }
+
