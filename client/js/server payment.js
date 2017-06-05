@@ -1,5 +1,5 @@
 
-if (Meteor.isServer) {
+/*if (Meteor.isServer) {
   Meteor.methods({
     'chargeCard': function(stripeToken) {
       check(stripeToken, String);
@@ -20,5 +20,17 @@ if (Meteor.isServer) {
       });
     }
   });
-}
+}*/
+Template.confirmation.events({
+      'click #send-email-button': function () {
+        var email = {
+            to: 'hockeyfan534@gmail.com',
+            from: 'hockeyfan534@gmail.com',
+            replyTo: 'abct@failtracker.com',
+            subject: "test email",
+            text: "hello lover boy"
+        };
+        Meteor.call('sendEmail', this.userId, email);
+      }
+});
 

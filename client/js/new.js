@@ -3,6 +3,7 @@ Router.route('/home');
 Router.route('/booking');
 Router.route('/');
 Router.route('/payment');
+Router.route('/confirmation')
 
 if (Meteor.isClient) {
   Template.payment.events({

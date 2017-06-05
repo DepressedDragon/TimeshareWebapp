@@ -32,13 +32,17 @@
         <li><a href="{{pathFor route='payment'}}">Payment</a></li>
     </ul>
 </template>
-<template name = "payment">
+<template name='confirmation'>
+  <button> Send email</button>
+</template>
+
+<!--<template name = "payment">
 {{#if currentUser}}
  <h1> Payment page</h1>
   <button> Pay here </button>
   {{/if}}
 </template>
-<!--
+
 <template name="payment">
   <div class="row">
     <div class="col-xs-12 col-md-6">
