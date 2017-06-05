@@ -33,4 +33,18 @@ if (Meteor.isServer){
   })
 
   })
+  Meteor.methods({
+    'sendEmail': function(toAddr,subj,text){
+      this.unblock();
+      Email.Send({
+        from: "booking@timesharewebapp.com",
+        to:Meteor.toAddr,
+        subject : subj,
+        text: text
+
+
+      })
+    }
+  })
+
 }

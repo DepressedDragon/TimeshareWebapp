@@ -33,7 +33,15 @@
     </ul>
 </template>
 <template name='confirmation'>
-  <button> Send email</button>
+    <div class = "container" >
+    <form role = "form" id = "email-form">
+        <div class = "form-group">
+            <label for="inputEmail">Email address</label>
+            <input type= "email" class = "form-control" id = "inputEmail" placeholder = "Enter email">
+        </div>
+        <button type = "submit" class = "btn btn-primary"> Send mail</button>
+    </form>
+    </div>
 </template>
 
 <!--<template name = "payment">

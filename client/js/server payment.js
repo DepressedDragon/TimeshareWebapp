@@ -22,15 +22,12 @@
   });
 }*/
 Template.confirmation.events({
-      'click #send-email-button': function () {
-        var email = {
-            to: 'hockeyfan534@gmail.com',
-            from: 'hockeyfan534@gmail.com',
-            replyTo: 'abct@failtracker.com',
-            subject: "test email",
-            text: "hello lover boy"
-        };
-        Meteor.call('sendEmail', this.userId, email);
+      'submit #confirmation-form': function (e,t) {
+        e.preventDefault();
+        var toAddr=t.find('#inputEmail').value;
+        var subject = ("Booked");
+        var body = ("Thanks for booking")
+        Meteor.call('sendEmail', toAddr, subj, text)
       }
-});
+})
 
