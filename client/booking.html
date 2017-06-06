@@ -1,0 +1,49 @@
+<template name = 'bookingPage'>
+
+<div id="main"> 
+	<p> Welcome to the booking page!</p>
+	{{makeSelectable}}
+	{{>calendar}} <!-- same calendar, but isSelectable state is now true -->
+</div>
+<!-- Booking information layout goes here! -->
+<div class="sidebar">
+	<!-- Side bar-->
+	<div>
+	 	<h2>Please enter the dates you wish to book:</h2> 
+	 	<hr>
+	</div>
+
+
+	<div class="{{arrState}}">
+		<h3>Please select your arrival date </h3>
+		{{setArrDate}} <!--Gets called each time the selected Date changes, and thus re-sets the date-->
+		<p>{{getArrDate}}</p>
+	</div>
+	
+	<div class="next1 {{next1State}}" style="text-align:center;">
+		<b>&#65088;</b>
+	</div>
+
+
+	<div class="{{depState}}">
+		<h3>Please enter the number of nights you wish to stay</h3>
+		<input id="numOfNights" input="text">
+
+		<h6>OR</h6>
+
+		<h6>Select your departure date on the calendar</h6>
+		{{setDepDate}}
+		<p>{{getDepDate}}</p>
+	</div>
+	
+
+	<div class="next2 {{next2State}}" style="text-align:center;">
+		<b>&#65088;</b>
+	</div>
+
+
+	<div class="{{endState}}">
+		<p>Proceed to payment page!</p>
+	</div>
+</div>
+</template>

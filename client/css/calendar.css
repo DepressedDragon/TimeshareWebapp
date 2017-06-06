@@ -114,8 +114,6 @@ body {font-family: Verdana,sans-serif;}
 
 }
 
-
-
 /* Add media queries for smaller screens */
 @media screen and (max-width:720px) {
     .weekdays li, .days li {width: 13.1%;}
@@ -129,6 +127,8 @@ body {font-family: Verdana,sans-serif;}
 @media screen and (max-width: 290px) {
     .weekdays li, .days li {width: 12.2%;}
 }
+
+
 
 .unselectable { /*All class names with 'unselectable' added to them will 
                   not allow text to be highlighted by the cursor*/

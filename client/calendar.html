@@ -7,8 +7,6 @@
 </body>
 
 
-
-
 <template name = 'calendarPage'> 
 <p> Welcome to the calendar page!</p>
 {{stopSelectable}} <!--Ensuring the calendar is not selectable on this page since it should be relatively static; view only. -->
@@ -17,12 +15,7 @@
 </Template>
 
 
-<template name = 'bookingPage'>
-<p> Welcome to the booking page!</p>
-{{makeSelectable}}
-{{>calendar}} <!-- same calendar, but isSelectable state is now true -->
-<!-- Booking information layout goes here! --> 
-</template>
+
 
 
 <Template name = "calendar">

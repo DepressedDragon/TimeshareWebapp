@@ -37,6 +37,21 @@ function getDays (month, year) {
 
 }
 
+//Searches an array for a specific object by an object property
+//Accepts an array of objects and an object property to search for (.day in this case), returns 1 object if found, returns undefined otherwise.
+function getByValue(arr, value) {
+  	for (var i=0, iLen=arr.length; i<iLen; i++) {
+    	if (arr[i].day == value) {
+    		return arr[i];
+    	}
+    	/*
+    	else {
+    		return undefined;
+    	}
+    	*/
+  	}
+}
+
 //Creates day objects to check for arr and dep dates
 class Day {
 	constructor(day, arr, dep) {
@@ -56,6 +71,10 @@ console.log("Today is: " + todaysDate)
 Session.set('month', todaysDate.getMonth());
 Session.set('year', todaysDate.getFullYear()); 
 
+Session.set('selectedDay', 00)
+Session.set('selectedMonth', 00)
+Session.set('selectedYear', 0000)
+
 var isSelectable = new ReactiveVar(false); //making selectability false to start
 
 Template.calendarPage.helpers({
@@ -69,7 +88,6 @@ Template.bookingPage.helpers({
 		isSelectable = true;	
 	}
 })
-
 
 Template.calendar.helpers({
 	//calendar helper functions go here
@@ -159,14 +177,6 @@ Template.calendar.helpers({
 		var unavailableDaysList = Session.get("unavailableDaysList")
 		//console.log(unavailableDaysList)
 		
-		//Searches an array for a specific object by an object property
-		//Accepts an array of objects and an object property to search for, returns 1 object.
-		function getByValue(arr, value) {
-		  	for (var i=0, iLen=arr.length; i<iLen; i++) {
-		    	if (arr[i].day == value) return arr[i];
-		  	}
-		}
-		
 		var bookedDay = getByValue(unavailableDaysList, thisDay)
 
 		if (bookedDay != undefined) { //if this day is indeed booked (bookedDay will be undefined if its not booked and will not run)
@@ -222,9 +232,8 @@ Template.calendar.events({
 	},
 
 	'click .day': function(){ //Selecting a DATE event
-		
-		if (isSelectable == true) {
-			var selectedDay = Number(this) //Converting object to int
+	
+		function selectThisDay(selectedDay) {
 			var selectedMonth = Session.get('month')
 			var selectedYear = Session.get('year')
 			//Storing selected date information in session variables
@@ -234,6 +243,43 @@ Template.calendar.events({
 			//Session.set('selectedDate', selectedDay-selectedMonth-selectedYear)
 			console.log("Selected date: " + selectedDay + "/" + selectedMonth + "/" + selectedYear)
 		}
+
+		if (isSelectable == true) {
+			//Check to see if this date can be selected
+			var selectedDay = Number(this) //Converting object to int
+			var unavailableDaysList = Session.get("unavailableDaysList")
+			var bookedDay = getByValue(unavailableDaysList, selectedDay) //Checking to see if this date is available or unavailable
+
+			if (bookedDay == undefined ) { 
+				//unavailableDaysList does not contain this date, it is available and therefore selectable
+				selectThisDay(selectedDay);
+			}
+			else if (bookedDay.arr == false && bookedDay.dep == true) {
+				//This date is someone elses departure date, so it is selectable, but only as an arrival date.
+				console.log("selectable, but as arr date only!")
+				if (Session.get('currentFinding') == 'arr')  { //If the user is currently selecting their arrival date, then allow it to go through
+					selectThisDay(selectedDay);
+				}
+				else{console.log("This is someone elses departure date. You can only set this as an arrival date!")}
+			}
+			else if (bookedDay.arr == true && bookedDay.dep == false) {
+				//This date is someone elses arrival date, so it is selectable, but only as an departure date
+				console.log("selectable, but as dep date only!")
+				if (Session.get('currentFinding') == 'dep') {
+					//Check to make sure this date is after the arr date *******************************
+					selectThisDay(selectedDay)
+				}
+				else{console.log("This is someone elses arrival date. You can only set this as a departure date!")}
+			}
+			else {
+				console.log('This date is not selectable!')
+			}
+		}
 	}
 })
+
+
+
+
+
 
