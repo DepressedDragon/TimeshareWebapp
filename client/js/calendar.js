@@ -38,17 +38,12 @@ function getDays (month, year) {
 }
 
 //Searches an array for a specific object by an object property
-//Accepts an array of objects and an object property to search for (.day in this case), returns 1 object if found, returns undefined otherwise.
+//Accepts an array of objects (and a predefined object property to search for, .day in this case), returns 1 object if found, returns undefined otherwise.
 function getByValue(arr, value) {
   	for (var i=0, iLen=arr.length; i<iLen; i++) {
     	if (arr[i].day == value) {
     		return arr[i];
     	}
-    	/*
-    	else {
-    		return undefined;
-    	}
-    	*/
   	}
 }
 
@@ -71,9 +66,8 @@ console.log("Today is: " + todaysDate)
 Session.set('month', todaysDate.getMonth());
 Session.set('year', todaysDate.getFullYear()); 
 
-Session.set('selectedDay', 00)
-Session.set('selectedMonth', 00)
-Session.set('selectedYear', 0000)
+var selectedDatesArray = [];
+Session.set('selectedDates', selectedDatesArray) 
 
 var isSelectable = new ReactiveVar(false); //making selectability false to start
 
@@ -84,9 +78,10 @@ Template.calendarPage.helpers({
 })
 
 Template.bookingPage.helpers({
+
 	'makeSelectable': function(){
 		isSelectable = true;	
-	}
+	},
 })
 
 Template.calendar.helpers({
@@ -141,17 +136,26 @@ Template.calendar.helpers({
 	},
 
 	'highlightSelectedDate': function(){ //This function is run every time there is a session change, and run individually for each day in the each block
-		var selectedDay = Session.get('selectedDay')		
-		var selectedMonth = Session.get('selectedMonth')
-		var selectedYear = Session.get('selectedYear')
+		selectedDatesArray = Session.get('selectedDates')
+		if (selectedDatesArray.length != 0) { //This code will only run when there is a selected date.
+			
+			//Getting information about this date on the calendar
+			var thisDay = this //'this' refers to each respective day in the month which is being cycled in the each loop
+			var thisMonth = Session.get('month')
+			var thisYear = Session.get('year')
 
-		var thisDay = this //'this' refers to each respective day in the month which is being cycled in the each loop
-		var thisMonth = Session.get('month')
-		var thisYear = Session.get('year')
-		
-		if (thisDay == selectedDay && thisMonth == selectedMonth && thisYear == selectedYear) { //if the current session date is the same as selected, then highlight
-		return "active" //This is a css class reference for styling to make the date look selected.
-		} 
+			for (var i = 0; i <= selectedDatesArray.length-1; i++) { //Testing to see if this date is found inside the selectedDates list (therefore must loop over the selectedDates list)
+				var selectedDate = selectedDatesArray[i]
+				
+				selectedDay = selectedDate.getDate()
+				selectedMonth = selectedDate.getMonth()
+				selectedYear = selectedDate.getFullYear()
+				
+				if (thisDay == selectedDay && thisMonth == selectedMonth && thisYear == selectedYear) { //if the current session date is the same as selected, then highlight
+				return "active" //This is a css class reference for styling to make the date look selected.
+				}
+			}
+		}
 	},
 	
 	'getUnavailableDates': function(){
@@ -236,43 +240,44 @@ Template.calendar.events({
 		function selectThisDay(selectedDay) {
 			var selectedMonth = Session.get('month')
 			var selectedYear = Session.get('year')
-			//Storing selected date information in session variables
-			Session.set('selectedDay', selectedDay)
-			Session.set('selectedMonth', selectedMonth)
-			Session.set('selectedYear', selectedYear)
-			//Session.set('selectedDate', selectedDay-selectedMonth-selectedYear)
-			console.log("Selected date: " + selectedDay + "/" + selectedMonth + "/" + selectedYear)
+		
+			var date = new Date(selectedYear, selectedMonth, selectedDay) //Creating a Date() with this information
+			selectedDatesArray = Session.get('selectedDates') 
+			selectedDatesArray[0] = date; //Replacing the first value in the selctedDatesArray with this value (first value will always be arrival date)
+			Session.set('selectedDates', selectedDatesArray)
+
+			console.log("Selected date: " + selectedDay + "/" + selectedMonth + "/" + selectedYear) //printing for visual analysis only
+			//for compatibility
+			Session.set('selectedDate', date)
 		}
 
-		if (isSelectable == true) {
+		if (isSelectable == true && Session.get('currentlyFindingArr') == true) { //If the calendar is in selectable mode, and we're currently looking for an arr date
 			//Check to see if this date can be selected
-			var selectedDay = Number(this) //Converting object to int
+			var selectedDay = Number(this) //Converting object to number
 			var unavailableDaysList = Session.get("unavailableDaysList")
 			var bookedDay = getByValue(unavailableDaysList, selectedDay) //Checking to see if this date is available or unavailable
-
-			if (bookedDay == undefined ) { 
-				//unavailableDaysList does not contain this date, it is available and therefore selectable
-				selectThisDay(selectedDay);
-			}
-			else if (bookedDay.arr == false && bookedDay.dep == true) {
-				//This date is someone elses departure date, so it is selectable, but only as an arrival date.
-				console.log("selectable, but as arr date only!")
-				if (Session.get('currentFinding') == 'arr')  { //If the user is currently selecting their arrival date, then allow it to go through
+	
+			if (isNaN(selectedDay) == false) { //Preventing placeholders from being selectable by checking for NaN value
+				if (bookedDay == undefined ) { 
+					//unavailableDaysList does not contain this date, it is available and therefore selectable
 					selectThisDay(selectedDay);
 				}
-				else{console.log("This is someone elses departure date. You can only set this as an arrival date!")}
-			}
-			else if (bookedDay.arr == true && bookedDay.dep == false) {
-				//This date is someone elses arrival date, so it is selectable, but only as an departure date
-				console.log("selectable, but as dep date only!")
-				if (Session.get('currentFinding') == 'dep') {
-					//Check to make sure this date is after the arr date *******************************
-					selectThisDay(selectedDay)
+				else if (bookedDay.arr == false && bookedDay.dep == true) {
+					//This date is someone elses departure date, so it is selectable as an arrival date.
+					selectThisDay(selectedDay);
 				}
-				else{console.log("This is someone elses arrival date. You can only set this as a departure date!")}
-			}
-			else {
-				console.log('This date is not selectable!')
+				/* Not Needed as user does not click to select dep date. 
+				else if (bookedDay.arr == true && bookedDay.dep == false) {
+					//This date is someone elses arrival date, so it is selectable, but only as an departure date
+					console.log("selectable, but as dep date only!")
+					if (Session.get('currentlyFindingArr') == 'dep') {
+						selectThisDay(selectedDay)
+					}
+					else{console.log("This is someone elses arrival date. You can only set this as a departure date!")}
+				} */ 
+				else {
+					console.log('This date is unavailable as an arrival date!')
+				}
 			}
 		}
 	}

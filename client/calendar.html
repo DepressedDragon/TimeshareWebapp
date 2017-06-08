@@ -40,7 +40,7 @@
     <li>Sa</li>
   </ul>
 
-{{#unless isSelectable}} <!--is false: (#unless is simply the inverse of #if) -->
+{{#unless isSelectable}} <!--#if isSelectable == false (#unless is simply the inverse of #if which checks for true) -->
 	
 	<ul class="days">
 	{{getUnavailableDates}} <!--Calling this only once to build the new array.-->
