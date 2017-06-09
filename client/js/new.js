@@ -3,6 +3,6 @@ Router.route('/home');
 Router.route('/booking');
 Router.route('/');
 Router.route('/payment');
-Router.route('/confirmation');
+Router.route('/email');
 
 

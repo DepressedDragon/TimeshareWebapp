@@ -20,14 +20,16 @@
       });
     }
   });
-}*/
-Template.confirmation.events({
-      'submit #confirmation-form': function (e,t) {
-        e.preventDefault();
-        var toAddr=t.find('#inputEmail').value;
-        var subject = ("Booked");
-        var body = ("Thanks for booking")
-        Meteor.call('sendEmail', toAddr, subj, text)
-      }
-})
+  
 
+}*/
+Template.email.events({
+  'click button': function (e,t) {
+    console.log("Send the email")
+    e.preventDefault();
+    var toAddr=t.find('#inputEmail').value;
+    var subject = ("Booked");
+    var body = ("Thanks for booking");
+    Meteor.call('sendEmail', toAddr, subj, text)
+  }
+})

@@ -25,3 +25,5 @@ mrgalaxy:stripe
 twbs:bootstrap
 gfk:mailgun-api
 accounts-base
+insecure
+autopublish
