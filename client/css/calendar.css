@@ -1,0 +1,141 @@
+* {box-sizing:border-box;}
+ul {list-style-type: none;}
+body {font-family: Verdana,sans-serif;}
+
+.month {
+    padding: 70px 25px;
+    width: 100%;
+    background: #4f6384;
+}
+
+.month ul {
+    margin: 0;
+    padding: 0;
+}
+
+.month ul li {
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.month .prev {
+    float: left;
+    padding-top: 10px;
+    display: block;
+    padding: 20px;
+    padding-left: 50px;
+    padding-right:50px;
+    //background:blue;
+
+
+}
+
+.month .next {
+    float: right;
+    padding-top: 10px;
+    display: block;
+    padding: 20px;
+    padding-left: 50px;
+    padding-right:50px;
+    //background:blue;
+}
+
+.weekdays {
+    margin: 0;
+    padding: 10px 0;
+    background-color: #ddd;
+}
+
+.weekdays li {
+    display: inline-block;
+    width: 13.6%;
+    color: #666;
+    text-align: center;
+}
+
+.days {
+    padding: 20px 0;
+    background: #eee;
+    margin: 0;
+}
+
+.days li {
+    background: #3FBF41;
+    opacity: 0.6;
+    padding: 20px;
+    list-style-type: none;
+    display: inline-block;
+    width: 13.6%;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size:12px;
+    color: white;
+}
+.days .today {
+    opacity: 1;
+}
+
+.days .spacer {
+    opacity: 0;
+
+}
+
+.days .regUnavailable {
+    background: #BF3F3F;
+    opacity: 0.6;
+    color: white !important
+}
+
+.days .arrUnavailable {
+    background: #ff7200;
+    opacity: 0.6;
+    color: white !important
+}
+
+.days .depUnavailable {
+    background: #6b3000;
+    opacity: 0.6;
+    color: white !important
+}
+
+.days .duelUnavailable {
+    background: #ff00cb;
+    opacity: 0.6;
+    color: white !important
+}
+
+.days .active {
+    background: black;
+    opacity:0.6;
+    color: white !important
+    border-style: solid;
+
+}
+
+/* Add media queries for smaller screens */
+@media screen and (max-width:720px) {
+    .weekdays li, .days li {width: 13.1%;}
+}
+
+@media screen and (max-width: 420px) {
+    .weekdays li, .days li {width: 12.5%;}
+    .days li .active {padding: 2px;}
+}
+
+@media screen and (max-width: 290px) {
+    .weekdays li, .days li {width: 12.2%;}
+}
+
+
+
+.unselectable { /*All class names with 'unselectable' added to them will 
+                  not allow text to be highlighted by the cursor*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

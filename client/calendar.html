@@ -1,11 +1,76 @@
-<!-- REMOVE BEFORE MERGE WITH CALENDAR BRANCH -->
-<template name='calendarPage'>
-	<h1>spacer_hidden_behind_header</h1>
-	<h3 style="color:red">REMOVE BEFORE MERGE WITH CALENDAR BRANCH</h3>
-	<h1>This is the placeholder calendar page</h1>
-	<p>1 2 3 4 5 6 7 8 9 10 11 12 13 </p>
-	<p>   14 15 16 17 18 19 20 21 22</p>
-	<p>   23 24 25 26 27 28 29 30 31</p>
+<template name = 'calendarPage'> 
+<p> Welcome to the calendar page!</p>
+{{stopSelectable}} <!--Ensuring the calendar is not selectable on this page since it should be relatively static; view only. -->
+{{>calendar}}
+<button type="button" class="book"><a href='/booking'>Book a Stay!</a></button> <!--Make this button link to --> 
+</Template>
+
+
+
+
+
+<Template name = "calendar">
+  <div class="month unselectable">      
+    <ul>
+      <li class="prev">&#10094;</li> <!--Simply getting arrow characters -->
+      <li class="next">&#10095;</li>
+      <li style="text-align:center">
+        {{month}}<br>
+        <span style="font-size:18px">{{year}}</span>
+      </li>
+    </ul>
+  </div>
+
+  <ul class="weekdays unselectable">
+    <li>Su</li>
+    <li>Mo</li>
+    <li>Tu</li>
+    <li>We</li>
+    <li>Th</li>
+    <li>Fr</li>
+    <li>Sa</li>
+  </ul>
+
+{{#unless isSelectable}} <!--#if isSelectable == false (#unless is simply the inverse of #if which checks for true) -->
 	
+	<ul class="days">
+	{{getUnavailableDates}} <!--Calling this only once to build the new array.-->
+	{{#each numOfDays}}
+	  <li class="day {{spacer}} {{today}} {{availability}}"> {{this}} </li> 
+	{{/each}}
+	</ul>
+
+{{else}}
+	
+	<ul class="days">
+	{{getUnavailableDates}} <!--Calling this only once to build the new array.-->
+	{{#each numOfDays}}
+	  <li class="day {{spacer}} {{today}} {{highlightSelectedDate}} {{availability}}"> {{this}} </li> 
+	{{/each}}
+	</ul>
+
+{{/unless}}
 
 </template>
+
+
+<!-- Explicitly declare all li elements
+29, 30, and 31 should have a display property
+make each date have a highlighted property
+made each date have an availability property
+
+This way, I don't have to reload the entire list everytime there is a selected date change or another change of some kind, only each individual li element-->
+
+
+
+
+<!--Not needed as of now, functions as intended without. May be needed in the future.
+<template name="Loading">
+	{{#if ready}}
+	{{>calendarPage}}
+	{{else}}
+		<p>Loading</p>
+	{{/if}}
+</template> 
+-->
+
