@@ -110,7 +110,7 @@ body {font-family: Verdana,sans-serif;}
     background: black;
     opacity:0.6;
     color: white !important
-    border-style: solid;
+    outline: 1px solid red;
 
 }
 

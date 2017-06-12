@@ -6,16 +6,17 @@
 }
 
 .sidebar {
+	padding-top: 60px ;
 	height: 100%;
 	width: 250px;
 	top: 0;
 	right: 0;
-	position: fixed;
+	position: absolute;
 	color: white;
 	background-color: grey;
 }
 
-.hide {
+.greyOut {
 	background-color: red;
 }
 
