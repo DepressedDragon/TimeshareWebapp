@@ -9,7 +9,7 @@ Session.set('currentlyFindingArr', true) //Starting selection on arr date
 
 Session.set({ //Starting display settings
 	'arrState': 'display',
-	'next1State': 'greyOut',
+	'next1State': 'display',
 	'depState': 'greyOut',
 	'next2State': 'greyOut',
 	'endState': 'greyOut'
@@ -45,6 +45,7 @@ Template.bookingPage.helpers({
 Template.bookingPage.events({
 	
 	'click .next1': function() { 
+		console.log('clicked next1')
 		Session.set('currentlyFindingArr', false);
 		Session.set({
 			'arrState': 'greyOut',

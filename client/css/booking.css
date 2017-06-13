@@ -1,14 +1,18 @@
-
-
 #main {
 	padding: 20px;
 	margin-right: 250px;
 }
 
+.topper {
+	padding: 10px;
+	padding-bottom: 0px;
+}
+
 .sidebar {
-	padding-top: 60px ;
-	height: 100%;
+	padding-top: 60px;
+	height: 78.8%;
 	width: 250px;
+	padding-bottom: 400px;
 	top: 0;
 	right: 0;
 	position: absolute;
@@ -16,10 +20,58 @@
 	background-color: grey;
 }
 
+.block1 {
+	position: static;
+	background-color: darkgrey;
+	//opacity: 0.5;
+	height: 130px;
+	padding: 10px;
+	padding-top: 0px;
+}
+ .block2 {
+ 	position: static;
+ 	//background-color: orange;
+ 	//opacity: 0.5;
+ 	height: 30px;
+ 	padding: 10px;
+ }
+ .block3 {
+ 	position: static;
+ 	background-color: purple;
+ 	opacity: 0.5;
+ 	height: 230px;
+ 	padding: 10px;
+ }
+ .block4 {
+ 	position: static;
+ 	background-color: green;
+ 	opacity: 0.5;
+ 	height: 30px;
+ 	padding: 10px;
+ }
+ .block5 {
+ 	position: static;
+ 	background-color: yellow;
+ 	opacity: 0.5;
+ 	height: 50px;
+ 	padding: 10px;
+ }
+
+
 .greyOut {
-	background-color: red;
+	//background-color: red;
 }
 
+.overlay {
+	display: none;
+
+	padding-top: 60px;
+	top: 0;
+	right: 0;
+	position: absolute;
+	background-color:black;
+	opacity: 0.6;
+}
 
 @media screen and (max-height: 450px) {
     .sidebar {padding-top: 15px;}
