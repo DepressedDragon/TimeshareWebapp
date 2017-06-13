@@ -189,9 +189,43 @@ a:focus {
 	border-bottom: 2px solid #ffffff;
 	margin-bottom: 25px;
 }
+
+
+/*	################################################################
+	Full Page Carousel
+################################################################# */
+
+h3 {
+  display: inline-block;
+  padding: 10px;
+  background: #B9121B;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.full-screen {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 /*	################################################################
 	SITE WRAPS
 ################################################################# */
+
+
+
+/* Background images are set within the HTML using inline CSS, not here */
+
+.fill {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
 
 #headerwrap {
 	background-color: #00b3fe;
@@ -323,13 +357,14 @@ a:focus {
 
 /* Footer */
 #footerwrap {
-	padding-top: 60px;
-	padding-bottom: 60px;
+	padding-top: 50px;
+	padding-bottom: 50px;
 	background: #384452;
 }
 
 #footerwrap p {
 	color: #bfc9d3;
+	text-align: center;
 }
 
 #footerwrap h4 {
