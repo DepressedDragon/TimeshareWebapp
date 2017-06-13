@@ -122,5 +122,10 @@ Template.bookingPage.events({
 			'next2State': 'greyOut',
 			'endState': 'display'
 		})
+	},
+
+	'click .proceed': function(){
+		console.log("Going to the next page!")
+		Router.go("/confirmation")
 	}
 })

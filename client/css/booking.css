@@ -8,11 +8,25 @@
 	padding-bottom: 0px;
 }
 
+.block3 input{
+
+	width: 50px;
+	height: 26px;
+	background-color: grey;
+	border: 2px solid lightgrey;
+	border-radius: 4px;
+
+}
+
+.block3 input:focus{
+	border-color: #555;
+}
+
 .sidebar {
 	padding-top: 60px;
-	height: 78.8%;
+	height: 100%;
 	width: 250px;
-	padding-bottom: 400px;
+	padding-bottom: 612px;
 	top: 0;
 	right: 0;
 	position: absolute;
@@ -22,22 +36,22 @@
 
 .block1 {
 	position: static;
-	background-color: darkgrey;
-	//opacity: 0.5;
+	background-color: pink;
+	opacity: 0.5;
 	height: 130px;
 	padding: 10px;
 	padding-top: 0px;
 }
  .block2 {
  	position: static;
- 	//background-color: orange;
- 	//opacity: 0.5;
+ 	background-color: orange;
+ 	opacity: 0.5;
  	height: 30px;
  	padding: 10px;
  }
  .block3 {
  	position: static;
- 	background-color: purple;
+ 	background-color: blue;
  	opacity: 0.5;
  	height: 230px;
  	padding: 10px;
