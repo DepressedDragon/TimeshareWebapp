@@ -21,7 +21,7 @@ import { Email } from 'meteor/email'
 if (Meteor.isServer){
   Meteor.startup(function(){
 
-  process.env.MAIL_URL = "smtp://postmaster%40sandbox260a407c6ce84fc2aff615cd40540759.mailgun.org:991af7d5c9f9ced9b6ae3ffe7ee9d500@smtp.mailgun.org:587"
+  process.env.MAIL_URL = "smtp://postmaster%40sandbox4a87f70a833e43cb80de894937a6b2b1.mailgun.org:641b2fae2c9499f3b12f9159794c68f2@smtp.mailgun.org:587"
 })
   Accounts.config({
     sendVerificationEmail: true
