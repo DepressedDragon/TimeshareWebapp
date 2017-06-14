@@ -10,10 +10,12 @@ Session.set('currentlyFindingArr', true) //Starting selection on arr date
 Session.set({ //Starting display settings
 	'arrState': 'display',
 	'next1State': 'display',
-	'depState': 'greyOut',
-	'next2State': 'greyOut',
-	'endState': 'greyOut'
+	'depState': 'overlay',
+	'next2State': 'overlay',
+	'endState': 'overlay'
 })
+
+
 
 Template.bookingPage.helpers({
 
@@ -48,11 +50,11 @@ Template.bookingPage.events({
 		console.log('clicked next1')
 		Session.set('currentlyFindingArr', false);
 		Session.set({
-			'arrState': 'greyOut',
-			'next1State': 'greyOut',
+			'arrState': 'overlay',
+			'next1State': 'overlay',
 			'depState': 'display',
 			'next2State': 'display',
-			'endState': 'greyOut'
+			'endState': 'overlay'
 		})
 	},
 
@@ -116,10 +118,10 @@ Template.bookingPage.events({
 
 	'click .next2': function(){
 		Session.set({
-			'arrState': 'greyOut',
-			'next1State': 'greyOut',
-			'depState': 'greyOut',
-			'next2State': 'greyOut',
+			'arrState': 'overlay',
+			'next1State': 'overlay',
+			'depState': 'overlay',
+			'next2State': 'overlay',
 			'endState': 'display'
 		})
 	},

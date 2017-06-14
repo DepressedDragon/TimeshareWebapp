@@ -8,25 +8,25 @@
 	padding-bottom: 0px;
 }
 
-.block3 input{
+.block3 input{ /*Text input default*/
 
 	width: 50px;
 	height: 26px;
-	background-color: grey;
+	background-color: #1c1e21;
 	border: 2px solid lightgrey;
 	border-radius: 4px;
 
 }
 
-.block3 input:focus{
+.block3 input:focus{ /*Text input when clicked on*/
 	border-color: #555;
 }
 
 .sidebar {
-	padding-top: 60px;
-	height: 100%;
+	margin-top: 60px;
+	height: 65.7%;
 	width: 250px;
-	padding-bottom: 612px;
+	margin-bottom: 0;
 	top: 0;
 	right: 0;
 	position: absolute;
@@ -35,56 +35,61 @@
 }
 
 .block1 {
-	position: static;
-	background-color: pink;
-	opacity: 0.5;
+	position: relative;
+	//background-color: pink;
+	//opacity: 0.9;
 	height: 130px;
 	padding: 10px;
 	padding-top: 0px;
+
+	//border: 2px solid magenta;
 }
  .block2 {
- 	position: static;
- 	background-color: orange;
- 	opacity: 0.5;
+ 	position: relative;
+ 	//background-color: orange;
+ 	//opacity: 0.9;
  	height: 30px;
  	padding: 10px;
+
+ 	background-color: #4f6384;
  }
  .block3 {
- 	position: static;
- 	background-color: blue;
- 	opacity: 0.5;
+ 	position: relative;
+ 	//background-color: blue;
+ 	//opacity: 0.9;
  	height: 230px;
  	padding: 10px;
  }
  .block4 {
- 	position: static;
- 	background-color: green;
- 	opacity: 0.5;
+ 	position: relative;
+ 	//background-color: green;
+ 	//opacity: 0.9;
  	height: 30px;
  	padding: 10px;
+
+ 	background-color: #4f6384;
+
  }
  .block5 {
- 	position: static;
- 	background-color: yellow;
- 	opacity: 0.5;
+ 	position: relative;
+ 	//background-color: yellow;
+ 	//opacity: 0.9;
  	height: 50px;
  	padding: 10px;
  }
 
 
-.greyOut {
-	//background-color: red;
-}
-
 .overlay {
-	display: none;
-
-	padding-top: 60px;
-	top: 0;
-	right: 0;
 	position: absolute;
+	height:100%;
+	width:100%;
+	top:0;
+	right:0;
+	z-index: 20;
+
+	
 	background-color:black;
-	opacity: 0.6;
+	opacity: 0.8;
 }
 
 @media screen and (max-height: 450px) {

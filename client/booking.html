@@ -17,21 +17,23 @@
 
 		<!--Block 1-->
 		<div class="block1">
-			<div class="{{arrState}}">
+			<div>
 				<h3>Please <em>select</em> your <kbd>arrival</kbd> date on the calendar</h3>
 				{{setArrDate}} <!--Gets called each time the selected Date changes, and thus re-sets the date-->
 				<p class="text-center"><b>{{getArrDate}}</b></p>
 			</div>
+			<div class="{{arrState}}"></div>
 		</div>	
 		<!--Block 2-->
-		<div class="block2 next1">
-			<div class="{{next1State}} text-center">
+		<div class="block2 next1" >
+			<div class="text-center">
 				<b>&#65088;</b>
 			</div>
+			<div class="{{next1State}}"></div>
 		</div>
 		<!--Block 3-->
 		<div class="block3">
-			<div class="{{depState}}">
+			<div>
 				<h3>Please <em>enter</em> the number of <kbd>nights</kbd> you wish to stay</h3>
 				<form class=numOfNights>
 					<input name="numOfNights" input="text">
@@ -40,19 +42,22 @@
 				<h3>Departure Date: </h3>
 				<p class="text-center"><b>{{getDepDate}}</b></p>
 			</div>
+			<div class="{{depState}}"></div>
 		</div>
 		<!--Block 4-->
-		<div class="block4">
-			<div class="next2 {{next2State}} text-center">
+		<div class="block4 next2">
+			<div class="text-center">
 				<b>&#65088;</b>
 			</div>
+			<div class="{{next2State}}"></div>
 		</div>
 
 		<!--Block 5-->
 		<div class="block5 proceed">
-			<div class="{{endState}}">
+			<div>
 				<h5 class="text-center">Proceed to confirmation page!</h5>
 			</div>
+			<div class="{{endState}}"></div>
 		</div>
 	</div>
 </template>
