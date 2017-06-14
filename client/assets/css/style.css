@@ -213,13 +213,15 @@ h3 {
 ################################################################# */
 
 
-html{
-      background: url(https://static.pexels.com/photos/1029/landscape-mountains-nature-clouds.jpg) no-repeat center center fixed; 
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
-    }
+html { 
+  background: url(https://static.pexels.com/photos/1029/landscape-mountains-nature-clouds.jpg) no-repeat center center fixed;
+  background-position: top center;
+  margin:0 auto; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 /* Background images are set within the HTML using inline CSS, not here */
 
 .fill {
