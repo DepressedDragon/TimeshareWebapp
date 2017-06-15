@@ -1,7 +1,6 @@
 <template name = 'bookingPage'>
 
 	<div id="main"> 
-		<p> Welcome to the booking page!</p>
 		{{makeSelectable}} <!--Ensuring the calendar is selectable on this page since it should now be interactive -->
 		{{>calendar}} <!-- same calendar, but isSelectable state is now true -->
 	</div> 
@@ -19,14 +18,14 @@
 		<div class="block1">
 			<div>
 				<h3>Please <em>select</em> your <kbd>arrival</kbd> date on the calendar</h3>
-				{{setArrDate}} <!--Gets called each time the selected Date changes, and thus re-sets the date-->
+				{{setArrDate}} <!--Gets called each time the selected Date changes, and thus re-displays the new date-->
 				<p class="text-center"><b>{{getArrDate}}</b></p>
 			</div>
 			<div class="{{arrState}}"></div>
 		</div>	
 		<!--Block 2-->
-		<div class="block2 next1" >
-			<div class="text-center">
+		<div class="block2" >
+			<div class="next1 text-center">
 				<b>&#65088;</b>
 			</div>
 			<div class="{{next1State}}"></div>
@@ -45,17 +44,17 @@
 			<div class="{{depState}}"></div>
 		</div>
 		<!--Block 4-->
-		<div class="block4 next2">
-			<div class="text-center">
+		<div class="block4">
+			<div class="next2 text-center">
 				<b>&#65088;</b>
 			</div>
 			<div class="{{next2State}}"></div>
 		</div>
 
 		<!--Block 5-->
-		<div class="block5 proceed">
+		<div class="block5">
 			<div>
-				<h5 class="text-center">Proceed to confirmation page!</h5>
+				<h5 class="proceed text-center">Proceed to confirmation page!</h5>
 			</div>
 			<div class="{{endState}}"></div>
 		</div>

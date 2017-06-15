@@ -1,6 +1,6 @@
 #main {
-	padding: 20px;
 	margin-right: 250px;
+	margin-top: 60px;
 }
 
 .topper {
@@ -20,6 +20,10 @@
 
 .block3 input:focus{ /*Text input when clicked on*/
 	border-color: #555;
+}
+
+.block3 button{
+	color: black;
 }
 
 .sidebar {
