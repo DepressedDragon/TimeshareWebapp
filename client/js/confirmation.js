@@ -14,10 +14,11 @@ Template.confirmationPage.events({
 		var currentAcc = Meteor.userId //get the id of the currently logged-in user
 		//console.log(currentAcc)
 		var selectedDatesList = Session.get('selectedDates')
-		var documentName = selectedDatesList[0] //Getting primitive value of the arr date for this booking, (for us as primary key for booking document)
+		var documentName = selectedDatesList[0].toString() //Getting string value of the arr date for this booking, (for use as name for booking document)
 		console.log(documentName)
-		Meteor.call('addBooking', documentName)
-		console.log(Meteor.users.find().fetch())
+		var datesArray = selectedDatesList
+		Meteor.call('addBooking', documentName, datesArray)
+		
 		
 	}
 })

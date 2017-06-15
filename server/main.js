@@ -11,22 +11,26 @@ Meteor.publish('userData', function () {
     return Meteor.users.find({ _id: this.userId }, {
       fields: { bookings: 1}
     });
-  } else {
+  } 
+  else {
     this.ready(); //if not, Declare that no data is being published, and the publish is ready(to avoid other feature mode)
   }
 });
 
 Meteor.methods({
-	'addBooking': function(documentName){
+	'addBooking': function(documentName, datesArray){
 		//console.log('Hello! This is running on server, but was called on client!')
 		var currentAcc = Meteor.userId();
 		console.log(currentAcc);
 
-		Meteor.users.update({_id: Meteor.userId()}, { $set: 
-			{'bookings' : {
-				documentName: {'apples':true, 'oranges':false} //TODO: Variable not working??
-				}
-
+		Meteor.users.update({_id: Meteor.userId()}, 
+			{ 
+			$push: {
+			 	'bookings' : {
+					'name': documentName,
+					'bookedDates': datesArray, 
+					
+			 	}
 			} 
 		})
 		
