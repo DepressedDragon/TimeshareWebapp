@@ -33,7 +33,7 @@
 
 {{#unless isSelectable}} <!--#if isSelectable == false (#unless is simply the inverse of #if which checks for true) -->
 	
-	<ul class="days">
+	<ul class="days unselectable">
 	{{getUnavailableDates}} <!--Calling this only once to build the new array.-->
 	{{#each numOfDays}}
 	  <li class="day {{spacer}} {{today}} {{availability}}"> {{this}} </li> 
@@ -42,7 +42,7 @@
 
 {{else}}
 	
-	<ul class="days">
+	<ul class="days unselectable">
 	{{getUnavailableDates}} <!--Calling this only once to build the new array.-->
 	{{#each numOfDays}}
 	  <li class="day {{spacer}} {{today}} {{highlightSelectedDate}} {{availability}}"> {{this}} </li> 

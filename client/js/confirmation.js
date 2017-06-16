@@ -17,7 +17,10 @@ Template.confirmationPage.events({
 		var documentName = selectedDatesList[0].toString() //Getting string value of the arr date for this booking, (for use as name for booking document)
 		console.log(documentName)
 		var datesArray = selectedDatesList
-		Meteor.call('addBooking', documentName, datesArray)
+		
+		Meteor.call('addBooking', documentName, datesArray) //Calling serverside method to complete the booking
+		console.log('Booking Completed! Thank you!')
+		//TODO: redirect to home page
 		
 		
 	}

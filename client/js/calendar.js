@@ -144,7 +144,11 @@ Template.calendar.helpers({
 			var thisMonth = Session.get('month')
 			var thisYear = Session.get('year')
 
-			for (var i = 0; i <= selectedDatesArray.length-1; i++) { //Testing to see if this date is found inside the selectedDates list (therefore must loop over the selectedDates list)
+			//Gathering unavailable dates info (only needed for depUnavailable checks for styling)
+			var unavailableDaysList = Session.get('unavailableDaysList')  
+			var bookedDay = getByValue(unavailableDaysList, thisDay)
+
+			for (var i = 0; i <= selectedDatesArray.length - 1; i++) { //Testing to see if this date is found inside the selectedDates list (therefore must loop over the selectedDates list)
 				var selectedDate = selectedDatesArray[i]
 				
 				selectedDay = selectedDate.getDate()
@@ -152,7 +156,20 @@ Template.calendar.helpers({
 				selectedYear = selectedDate.getFullYear()
 				
 				if (thisDay == selectedDay && thisMonth == selectedMonth && thisYear == selectedYear) { //if the current session date is the same as selected, then highlight
-				return "active" //This is a css class reference for styling to make the date look selected.
+					if(i == 0){ //arr date
+						console.log('this is arrival date!')
+						//Display the correct background gadient for different selection circumstances
+						if (bookedDay != undefined) {console.log('this is not totally free'); return 'arrActiveDepUnavailable'} //If this date is not fully available, it must be a someone elses dep date, display respective background gradient
+						else {return 'arrActive'} //Otherwise, use normal background gradient
+					}
+					else if (i == selectedDatesArray.length - 1) {//dep date
+						
+						if (bookedDay != undefined) {return 'depActiveArrUnavailable'} //Same procedure as above
+						else {return 'depActive'}
+					}
+					else {
+						return "regActive" //These are css class references for styling to make the date look selected.
+					}
 				}
 			}
 		}
@@ -186,14 +203,14 @@ Template.calendar.helpers({
 		if (bookedDay != undefined) { //if this day is indeed booked (bookedDay will be undefined if its not booked and will not run)
    			if (bookedDay.day == thisDay) { 
 
-   				if (bookedDay.arr == true) {
+   				if (bookedDay.arr == true && bookedDay.dep == false) {
    					return "arrUnavailable" //This is an arrival date!
    				}
-   				else if (bookedDay.dep == true) {
+   				else if (bookedDay.arr == false && bookedDay.dep == true) {
    					return "depUnavailable" //This is a departure date!
    				} 
    				else if (bookedDay.arr == true && bookedDay.dep == true) { 
-   					return "duelUnavailable"//This is both an arrival and departure date! Double booked! (either a dep and arr on same day by different people, or one person... TODO: figure out how to handle this)
+   					return "duelUnavailable"//This is both an arrival and departure date! Double booked! (a dep and arr on same day by different people)
    				} 
    				else { 
    					return "regUnavailable" //This is a regular 'inbetween' booked Date

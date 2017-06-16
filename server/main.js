@@ -17,6 +17,11 @@ Meteor.publish('userData', function () {
   }
 });
 
+Accounts.onCreateUser(function(options, user) {
+   	user.bookings = [];
+    return user;
+});
+
 Meteor.methods({
 	'addBooking': function(documentName, datesArray){
 		//console.log('Hello! This is running on server, but was called on client!')
@@ -27,18 +32,67 @@ Meteor.methods({
 			{ 
 			$push: {
 			 	'bookings' : {
-					'name': documentName,
+					'Name': documentName,
 					'bookedDates': datesArray, 
 					
 			 	}
 			} 
 		})
-		
+		//Adding these booked dates to the unavailableDates collection
+		for (i = 0; i <= datesArray.length - 1; i++) { //for each date
+				var d = datesArray[i];
+				var day = d.getDate();
+				var month = d.getMonth();
+				var year = d.getFullYear();
 
-		//console.log(Meteor.users.find().fetch())
-	}	
+				var queryResult = bookedDates.findOne({'day': day, 'month': month, 'year': year}, {'arr': true, 'dep': true})
+
+				if (i == 0) { //arr date (always first in array)
+					if (queryResult != undefined) { //If we've found a matching date in the booked dates List
+						if(queryResult.dep == true) {
+							bookedDates.update({_id: queryResult._id}, { $set: {'arr': true} }) //Using update() because this is another persons dep date
+						}
+						else {console.log('Error: could not set the arr date')}
+					}
+					else {
+						bookedDates.insert({ 
+							'day': day,
+							'month': month,
+							'year': year,
+							'arr': true,
+							'dep': false
+						});
+					}
+				}
+				else if (i == datesArray.length-1) { //dep date (always last in array)
+					if (queryResult != undefined) { //If we've found a matching date in the booked dates List
+						bookedDates.update({_id: queryResult._id}, { $set: {'dep': true} }) //Using update() because this is another persons arr date
+					}
+					else {
+						bookedDates.insert({ 
+							'day': day,
+							'month': month,
+							'year': year,
+							'arr': false,
+							'dep': true	
+						});
+					}
+				}
+				else { //normal 'in-between' unavailable date
+					bookedDates.insert({
+						'day': day,
+						'month': month,
+						'year': year,
+						'arr': false,
+						'dep': false
+					});
+				} 
+			}	
+		}
 
 
-})
+	})
 
 
+
+//bookedDates.insert({day: 15, month: 2, year: 2017, arr: true, dep: true})

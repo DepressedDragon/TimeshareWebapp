@@ -110,7 +110,7 @@ Template.bookingPage.events({
 
 		if (isNaN(numOfNights) == false && numOfNights <= 14 && numOfNights > 0){ //Only runs code if a number between 1 and 14 was entered.
 			var selectedDatesArray = Session.get('selectedDates')
-			selectedDatesArray.splice(1, selectedDatesArray.length) //Deleting everything in the list execpt for the arr date (first index)
+			selectedDatesArray.splice(1, selectedDatesArray.length) //Deleting everything in the list execpt for the arr date (first index) to overwrite any previous selections
 			console.log(selectedDatesArray)
 
 			//Generating list of selectedDates
@@ -128,13 +128,9 @@ Template.bookingPage.events({
 				if (i == 0){console.log("added Dates:")}
 			}
 
-			//setDepDate -- Setting departure date for display 
-			var selectedDepDate = selectedDatesArray[selectedDatesArray.length - 1] //getting last date in the list (always dep date) 
-			var selectedDateString = formatDate(selectedDepDate, 'fullDate') //Formating date into string
-			Session.set('depDate', selectedDateString) //Setting the date
-
-
+			
 			//Preform checks to make sure that these dates do not interfere with already booked dates. 
+			/*
 			var arrivalDate = selectedDatesArray[0]
 			
 			var thisMonth = arrivalDate.getMonth()
@@ -154,11 +150,45 @@ Template.bookingPage.events({
 			})
 
 			console.log(unavailableDatesCursor.fetch())
+			*/
+
+			//Dates Validity Check
+			var validityCheck = true; //Starting as valid
+
+			for (i = 0; i <= selectedDatesArray.length-1; i++) {
+				var d = selectedDatesArray[i];
+				var day = d.getDate();
+				var month = d.getMonth();
+				var year = d.getFullYear();
+				doc = bookedDates.findOne({'day': day, 'month': month, 'year': year})
 			
-			//TODO: Continue the check here!
+				if (doc != undefined) {//If the document exists in the collection..
+					if (i == 0 && doc.dep == true && doc.arr == false){
+						console.log('good as an arrival date!')
+					}
+					else if (i == selectedDatesArray.length - 1 && doc.arr == true && doc.dep == false) {
+						console.log('good as a departure date!')
+					}
+					else { //If this does not meet either of the arr or dep special cases, this is an unavaialble date and therefore the selection is not valid. 
+						validityCheck = false; 
+						'Error: This is an overlapping date!'
+					}
+				}
+			}
+			//Final evaluation
+			if (validityCheck == true){
+				Session.set('selectedDates', selectedDatesArray) //Select the dates
 
+				//setDepDate -- Setting departure date for display 
+				var selectedDepDate = selectedDatesArray[selectedDatesArray.length - 1] //getting last date in the list (always dep date) 
+				var selectedDateString = formatDate(selectedDepDate, 'fullDate') //Formating date into string
+				Session.set('depDate', selectedDateString) //Setting the date
+			}
+			else {
+				 console.log('Unvalid selection. Please select available (green) dates')
+			}
 
-			Session.set('selectedDates', selectedDatesArray)
+			
 
 
 

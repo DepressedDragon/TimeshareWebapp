@@ -46,6 +46,7 @@ body {font-family: Verdana,sans-serif;}
     margin: 0;
     padding: 10px 0;
     background-color: #ddd;
+    padding-left: 20px;
 }
 
 .weekdays li {
@@ -59,6 +60,7 @@ body {font-family: Verdana,sans-serif;}
     padding: 20px 0;
     background: #eee;
     margin: 0;
+    padding-left: 20px;
 }
 
 .days li {
@@ -79,40 +81,65 @@ body {font-family: Verdana,sans-serif;}
 
 .days .spacer {
     opacity: 0;
-
 }
-
+/*Unavailable date backgrounds (red)*/
 .days .regUnavailable {
     background: #BF3F3F;
     opacity: 0.6;
-    color: white !important
 }
 
 .days .arrUnavailable {
-    background: #ff7200;
+    //background: #ff7200;
+    background: linear-gradient(to right, #3FBF41 60%, #BF3F3F 60%);
     opacity: 0.6;
-    color: white !important
 }
 
 .days .depUnavailable {
-    background: #6b3000;
+    //background: #6b3000;
+    background: linear-gradient(to right, #BF3F3F 40%, #3FBF41 40%);
     opacity: 0.6;
-    color: white !important
 }
 
 .days .duelUnavailable {
-    background: #ff00cb;
+    //background: #ff00cb;
+    background: linear-gradient(to right, #BF3F3F 40%, #3FBF41 40%, #3FBF41 60%, #BF3F3F 60%);
     opacity: 0.6;
-    color: white !important
 }
-
-.days .active {
+/*Selected (active) date backgrounds (black)*/
+.days .regActive {
     background: black;
     opacity:0.6;
-    color: white !important
-    outline: 1px solid red;
-
+    //outline: 3px solid black;
 }
+
+.days .arrActive {
+    //background: black;
+    background: linear-gradient(to right, #3FBF41 60%, black 60%);
+    opacity:0.6;
+    //outline: 3px solid black;
+}
+
+.days .arrActiveDepUnavailable {
+    //background: black;
+    background: linear-gradient(to right, #BF3F3F 40%, #3FBF41 40%, #3FBF41 60%, black 60%);
+    opacity:0.6;
+    //outline: 3px solid black;
+}
+
+.days .depActive {
+    //background: black;
+    background: linear-gradient(to right, black 40%, #3FBF41 40%);
+    opacity:0.6;
+    //outline: 3px solid black;
+}
+
+.days .depActiveArrUnavailable {
+    //background: black;
+    background: linear-gradient(to right, black 40%, #3FBF41 40%, #3FBF41 60%, #BF3F3F 60%);
+    opacity:0.6;
+    //outline: 3px solid black;
+}
+
 
 /* Add media queries for smaller screens */
 @media screen and (max-width:720px) {
