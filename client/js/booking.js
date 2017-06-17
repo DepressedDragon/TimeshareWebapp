@@ -130,7 +130,7 @@ Template.bookingPage.events({
 
 			
 			//Preform checks to make sure that these dates do not interfere with already booked dates. 
-			/*
+			/*	
 			var arrivalDate = selectedDatesArray[0]
 			
 			var thisMonth = arrivalDate.getMonth()

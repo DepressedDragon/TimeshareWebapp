@@ -23,8 +23,8 @@ Accounts.onCreateUser(function(options, user) {
 });
 
 Meteor.methods({
-	'addBooking': function(documentName, datesArray){
-		//console.log('Hello! This is running on server, but was called on client!')
+	'addBooking': function(documentName, datesArray, monthOne, monthTwo, yearOne, yearTwo){
+		console.log('Hello! This is running on server, but was called on client!')
 		var currentAcc = Meteor.userId();
 		console.log(currentAcc);
 
@@ -34,7 +34,14 @@ Meteor.methods({
 			 	'bookings' : {
 					'Name': documentName,
 					'bookedDates': datesArray, 
-					
+					'months': {
+						'month1': monthOne, 
+						'month2': monthTwo
+					},
+					'years': {
+						'year1': yearOne, 
+						'year2': yearTwo
+					} 
 			 	}
 			} 
 		})

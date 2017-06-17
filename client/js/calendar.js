@@ -155,20 +155,23 @@ Template.calendar.helpers({
 				selectedMonth = selectedDate.getMonth()
 				selectedYear = selectedDate.getFullYear()
 				
+				//Returning different css class references for styling to make the date look selected.
 				if (thisDay == selectedDay && thisMonth == selectedMonth && thisYear == selectedYear) { //if the current session date is the same as selected, then highlight
 					if(i == 0){ //arr date
-						console.log('this is arrival date!')
 						//Display the correct background gadient for different selection circumstances
-						if (bookedDay != undefined) {console.log('this is not totally free'); return 'arrActiveDepUnavailable'} //If this date is not fully available, it must be a someone elses dep date, display respective background gradient
-						else {return 'arrActive'} //Otherwise, use normal background gradient
+						if (bookedDay != undefined) {console.log('this is not totally free'); return 'arrActiveDepUnavailable'} //If this date is not fully available, it must be a someone elses dep date, display respective style
+						else if (selectedDatesArray.length <= 1) {
+							return'regActive' //Reg full square border when first selecting a black arr date for aesthetics reasons only. 
+						}
+						else {return 'arrActive'} //Otherwise, use normal style
 					}
 					else if (i == selectedDatesArray.length - 1) {//dep date
 						
 						if (bookedDay != undefined) {return 'depActiveArrUnavailable'} //Same procedure as above
-						else {return 'depActive'}
+						else {return 'depActive'} //Normal style
 					}
 					else {
-						return "regActive" //These are css class references for styling to make the date look selected.
+						return "regActive" //Normal style for full size in-between dates
 					}
 				}
 			}
@@ -186,10 +189,17 @@ Template.calendar.helpers({
 			count += 1
 		})
 		Session.set("unavailableDaysList", listOfDayObjects)
-		//#console.log("done adding items to array, printing array")
-		//#console.log(Session.get('unavailableDaysList'))
 
 		//In the forEach block, running each 'day' through class factory to give it the .arr or .dep boolean values.
+
+
+		var usersAccount = Meteor.users.findOne({'_id': Meteor.userId()})
+		var usersBookingsArray = usersAccount.bookings;
+	
+		for (var i = 0; i < usersBookingsArray.length - 1; i++) {
+			var booking = usersBookingsArray[i]
+			console.log(booking.Name)
+		}
 
 	},
 
