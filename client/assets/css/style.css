@@ -269,7 +269,6 @@ Thumbnails
 }
 .thumbnails a{
 	float: left;
-	width: 25%;
 	padding-right: 15px;
 	margin-bottom: 15px;
 	box-sizing: border-box;
