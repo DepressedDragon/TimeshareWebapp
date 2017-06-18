@@ -182,23 +182,33 @@ Template.calendar.helpers({
 		listOfDayObjects = []
 		count = 0
 		
+		//In the forEach block, running each 'day' through class factory to give it the .arr or .dep boolean values.
 		var bookedDatesCursor = bookedDates.find({month: Session.get('month'), year: Session.get('year') }) //Retrieve all days with this 'month' and this 'year'
 		bookedDatesCursor.forEach( function(doc) {    //Looping over cursor and placing each day in the array
-			console.log(doc.day)
+			//console.log(doc.day)
 			listOfDayObjects[count] = new Day(doc.day, doc.arr, doc.dep) //Creating a new day objects and storing in array
 			count += 1
 		})
 		Session.set("unavailableDaysList", listOfDayObjects)
 
-		//In the forEach block, running each 'day' through class factory to give it the .arr or .dep boolean values.
-
-
+		//Getting usersOwnBooking dates for unqiue dates display
 		var usersAccount = Meteor.users.findOne({'_id': Meteor.userId()})
-		var usersBookingsArray = usersAccount.bookings;
-	
-		for (var i = 0; i < usersBookingsArray.length - 1; i++) {
-			var booking = usersBookingsArray[i]
-			console.log(booking.Name)
+		if (usersAccount != undefined) { //Making the client wait until usersAccount is available to proceed
+			var usersBookingObjectsArray = usersAccount.bookings;
+			var usersBookings = []
+			var currMonth = Session.get('month')
+			var currYear = Session.get('year')
+
+			//Getting the respective year(s) and month(s) for the displayed year/month on the calendar (only getting applicable information)
+			for (var i = 0; i <= usersBookingObjectsArray.length - 1; i++) {
+				var booking = usersBookingObjectsArray[i]
+				if (booking.year1 == currYear || booking.year2 == currYear) {
+					if (booking.month1 == currMonth || booking.month2 == currMonth) {
+						usersBookings.push(booking.bookedDates)
+					}
+				}
+			}
+			Session.set('usersBookings', usersBookings)
 		}
 
 	},
@@ -206,13 +216,15 @@ Template.calendar.helpers({
 	'availability': function(){
 		var thisDay = Number(this)
 		var unavailableDaysList = Session.get("unavailableDaysList")
+		
 		//console.log(unavailableDaysList)
 		
 		var bookedDay = getByValue(unavailableDaysList, thisDay)
+		
 
 		if (bookedDay != undefined) { //if this day is indeed booked (bookedDay will be undefined if its not booked and will not run)
    			if (bookedDay.day == thisDay) { 
-
+   				//Preforming checks to see if this is reg, arr, dep, or duel. 
    				if (bookedDay.arr == true && bookedDay.dep == false) {
    					return "arrUnavailable" //This is an arrival date!
    				}
@@ -224,9 +236,38 @@ Template.calendar.helpers({
    				} 
    				else { 
    					return "regUnavailable" //This is a regular 'inbetween' booked Date
-   				} 
+   				}
 			}
 			else {/*console.log("available!")*/}
+		}
+	},
+
+	'usersOwnBookings': function(){
+		var thisDay = Number(this)
+		if (isNaN(thisDay) == false) {
+			var thisDate = new Date(Session.get('year'), Session.get('month'), thisDay)
+			var usersBookings = Session.get('usersBookings')
+	
+			if (usersBookings != undefined) { //making program wait for session update
+				//Accessing 2D list of unique users own bookings to check if this booked date is one of the users own booked dates
+				for (i = 0; i <= usersBookings.length - 1; i++){ //Getting individual booking
+					for (j = 0; j <= usersBookings[i].length - 1; j++){ //Getting individual day OF individual booking
+						if (usersBookings[i][j].getTime() == thisDate.getTime()){ //Comparing Date() objects
+							//Check if arr, dep, duel, or reg.
+							if (j == 0) { //Arr date
+								return "arrUserOwnBooking"
+								//TODO: ***Make and array that containes all of the special dates that were used, as ARR or DEP only, and check to see if the next date is already in this list. If this is the case, then change the return on this date to duel
+							}
+							else if (j == usersBookings[i].length - 1) { //Dep date
+								return "depUserOwnBooking"
+							}
+							else {
+								return "regUserOwnBooking" //Reg in-between date
+							}
+						}
+					}
+				}	
+			}
 		}
 	}  
 

@@ -83,7 +83,38 @@ body {font-family: Verdana,sans-serif;}
 .days .spacer {
     opacity: 0;
 }
-/*Unavailable date backgrounds (red)*/
+
+
+/*-------- Special users own unique bookings overlays --------*/
+
+
+.days .arrUserOwnBooking::before{
+    content: "";
+    position: absolute; 
+    bottom: 0; 
+    left: 60%; 
+    height:100%;
+    width: 40%;
+    background: #4f6384;
+}
+
+.days .depUserOwnBooking::before{
+    content: "";
+    position: absolute; 
+    bottom: 0; 
+    left: 0%; 
+    height:100%;
+    width: 40%;
+    background: #4f6384;
+}
+
+.days .regUserOwnBooking{
+    background: #4f6384 !important;
+    opacity: 0.6;
+}
+
+
+/*-------- Unavailable date backgrounds (red) --------*/
 .days .regUnavailable {
     background: #BF3F3F;
     opacity: 0.6;
@@ -106,21 +137,16 @@ body {font-family: Verdana,sans-serif;}
     background: linear-gradient(to right, #BF3F3F 40%, #3FBF41 40%, #3FBF41 60%, #BF3F3F 60%);
     opacity: 0.6;
 }
-/*Selected (active) date backgrounds (black)*/
+
+
+/*-------- Selected (active) date border elements & pseudo elements (black) --------*/
 /*Regular date selection setting*/
 .days .regActive {
-    //background: black;
-    opacity:0.6;
+    opacity: 0.6;
     outline: 3px solid black;
 }
 
 /*Reg Arr date*/
-.days .arrActive {
-    //background: black;
-    //background: linear-gradient(to right, #3FBF41 60%, black 60%);
-    opacity:0.6;
-    //outline: 3px solid black;
-}
 .days .arrActive::after {
     content: "";
     position: absolute; 
@@ -132,13 +158,6 @@ body {font-family: Verdana,sans-serif;}
 }
 
 /*Reg Dep date*/
-.days .depActive {
-    //background: black;
-    //background: linear-gradient(to right, black 40%, #3FBF41 40%);
-    opacity:0.6;
-    //outline: 3px solid black;
-}
-
 .days .depActive::after {
     content: "";
     position: absolute; 
@@ -149,15 +168,7 @@ body {font-family: Verdana,sans-serif;}
     outline: 3px solid black;
 }
 
-
 /*Arr date when on a booked Dep date*/
-.days .arrActiveDepUnavailable {
-    //background: black;
-    background: linear-gradient(to right, #BF3F3F 40%, #3FBF41 40%);
-    opacity:0.6;
-    //outline: 3px solid black;
-}
-
 .days .arrActiveDepUnavailable::after {
     content: "";
     position: absolute; 
@@ -169,13 +180,6 @@ body {font-family: Verdana,sans-serif;}
 }
 
 /*Dep date when on a booked Arr date*/
-.days .depActiveArrUnavailable {
-    //background: black;
-    background: linear-gradient(to right, #3FBF41 60%, #BF3F3F 60%);
-    opacity:0.6;
-    //outline: 3px solid black;
-}
-
 .days .depActiveArrUnavailable::after {
     content: "";
     position: absolute; 
@@ -185,7 +189,6 @@ body {font-family: Verdana,sans-serif;}
     width: 40%;
     outline: 3px solid black;
 }
-/*Not used, not needed!*/
 
 
 

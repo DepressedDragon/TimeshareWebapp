@@ -34,14 +34,10 @@ Meteor.methods({
 			 	'bookings' : {
 					'Name': documentName,
 					'bookedDates': datesArray, 
-					'months': {
-						'month1': monthOne, 
-						'month2': monthTwo
-					},
-					'years': {
-						'year1': yearOne, 
-						'year2': yearTwo
-					} 
+					'month1': monthOne, 
+					'month2': monthTwo,
+					'year1': yearOne, 
+					'year2': yearTwo
 			 	}
 			} 
 		})
