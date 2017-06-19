@@ -326,6 +326,9 @@ a:focus {
 	padding-top: 60px;
 	padding-bottom: 60px;
 	background: #384452;
+
+	position:relative;
+	z-index: 100000000000;
 }
 
 #footerwrap p {

@@ -95,7 +95,3 @@ Meteor.methods({
 
 
 	})
-
-
-
-//bookedDates.insert({day: 15, month: 2, year: 2017, arr: true, dep: true})

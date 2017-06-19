@@ -1,8 +1,14 @@
 <template name = 'calendarPage'> 
-<p> Welcome to the calendar page!</p>
-{{stopSelectable}} <!--Ensuring the calendar is not selectable on this page since it should be relatively static; view only. -->
-{{>calendar}}
-<button type="button" class="book"><a href='/booking'>Book a Stay!</a></button> <!--Make this button link to --> 
+	<div id="main">
+		{{stopSelectable}} <!--Ensuring the calendar is not selectable on this page since it should be relatively static; view only. -->
+		{{>calendar}}
+		<div class="makeABooking">
+			<div class="textbox text-center unselectable">
+				<p>Click here to make a booking!</p>
+			</div>
+			
+		</div>
+	</div>
 </Template>
 
 
@@ -35,6 +41,7 @@
 	
 	<ul class="days unselectable">
 	{{getUnavailableDates}} <!--Calling this only once to build the new array.-->
+	{{getUsersOwnBookings}}
 	{{#each numOfDays}}
 	  <li class="day {{spacer}} {{today}} {{availability}} {{usersOwnBookings}}"> {{this}} </li> 
 	{{/each}}
@@ -44,7 +51,7 @@
 	
 	<ul class="days unselectable">
 	{{getUnavailableDates}} <!--Calling this only once to build the new array.-->
-
+	{{getUsersOwnBookings}}
 	{{#each numOfDays}}
 	  <li class="day {{spacer}} {{today}} {{highlightSelectedDate}} {{availability}} {{usersOwnBookings}}"> {{this}} </li> 
 	{{/each}}

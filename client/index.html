@@ -48,8 +48,14 @@
         </div><!--/.nav-collapse -->
       </div>
     </div>
-    
-
+  
+    {{#if errorDisplay}}
+		<div class = "errorDisplayBar">
+			<p>{{getErrorMessage}}</p>
+		</div>
+	{{/if}}
+	
+	
 </template>
 	
 

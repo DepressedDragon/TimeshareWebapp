@@ -2,6 +2,41 @@
 ul {list-style-type: none;}
 body {font-family: Verdana,sans-serif;}
 
+/*Sidebar classes*/
+.makeABooking {
+    margin-top: 65px;
+    height: 80%;
+    width: 250px;
+    margin-bottom: 0;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-color: grey;
+    border-right: 3px solid #282828;
+}
+
+
+
+.makeABooking .textbox {
+    background-color: #4f6384;
+    width: 80%;
+    position: absolute;
+    top: 180px;
+    margin: 20px;
+    border: 3px solid darkgrey;
+    border-radius: 5px;
+}
+
+.makeABooking .textbox:hover{
+    background-color: #6b85af;
+}
+
+.makeABooking .textbox p {
+    font-size: 20px !important;
+    color: white !important;
+}
+ /*Calendar classes*/
+
 .month {
     padding: 70px 25px;
     width: 100%;
@@ -28,18 +63,27 @@ body {font-family: Verdana,sans-serif;}
     padding-left: 50px;
     padding-right:50px;
     //background:blue;
+}
 
-
+.month .prev:hover{
+    color: black;
+    opacity: 0.7;
 }
 
 .month .next {
     float: right;
+    height: 100%;
     padding-top: 10px;
     display: block;
     padding: 20px;
     padding-left: 50px;
     padding-right:50px;
     //background:blue;
+}
+
+.month .next:hover{
+    color: black;
+    opacity: 0.7;
 }
 
 .weekdays {
@@ -76,17 +120,25 @@ body {font-family: Verdana,sans-serif;}
     color: white;
     position: relative;
 }
+
+.days li:hover {
+    opacity: 0.7;
+}
 .days .today {
     opacity: 1;
 }
 
 .days .spacer {
-    opacity: 0;
+   visibility: hidden;
 }
 
 
 /*-------- Special users own unique bookings overlays --------*/
 
+.days .regUserOwnBooking{
+    background: #4f6384 !important;
+    opacity: 0.6;
+}
 
 .days .arrUserOwnBooking::before{
     content: "";
@@ -108,8 +160,8 @@ body {font-family: Verdana,sans-serif;}
     background: #4f6384;
 }
 
-.days .regUserOwnBooking{
-    background: #4f6384 !important;
+.days .duelUserOwnBooking {
+    background: linear-gradient(to right, #4f6384 40%, #3FBF41 40%, #3FBF41 60%, #4f6384 60%) !important;
     opacity: 0.6;
 }
 
@@ -189,9 +241,6 @@ body {font-family: Verdana,sans-serif;}
     width: 40%;
     outline: 3px solid black;
 }
-
-
-
 
 /* Add media queries for smaller screens */
 @media screen and (max-width:720px) {

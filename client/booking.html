@@ -17,9 +17,8 @@
 		<!--Block 1-->
 		<div class="block1">
 			<div>
-				<h3>Please <em>select</em> your <kbd>arrival</kbd> date on the calendar</h3>
+				<h4>Please <em>select</em> your <kbd>arrival</kbd> date on the calendar</h4>
 				{{setArrDate}} <!--Gets called each time the selected Date changes, and thus re-displays the new date-->
-				<p class="text-center"><b>{{getArrDate}}</b></p>
 			</div>
 			<div class="{{arrState}}"></div>
 		</div>	
@@ -33,13 +32,11 @@
 		<!--Block 3-->
 		<div class="block3">
 			<div>
-				<h3>Please <em>enter</em> the number of <kbd>nights</kbd> you wish to stay</h3>
+				<h4>Please <em>enter</em> the number of <kbd>nights</kbd> you wish to stay</h4>
 				<form class=numOfNights>
 					<input name="numOfNights" input="text">
 					<button type="submit">Ok</button>
 				</form>
-				<h3>Departure Date: </h3>
-				<p class="text-center"><b>{{getDepDate}}</b></p>
 			</div>
 			<div class="{{depState}}"></div>
 		</div>
@@ -57,6 +54,15 @@
 				<h5 class="proceed text-center">Proceed to confirmation page!</h5>
 			</div>
 			<div class="{{endState}}"></div>
+		</div>
+
+		<div class="block6">
+			<div>
+				<h4>Arrival Date: </h4>
+				<p class="text-center"><b>{{getArrDate}}</b></p>
+				<h4>Departure Date: </h4>
+				<p class="text-center"><b>{{getDepDate}}</b></p>
+			</div>
 		</div>
 	</div>
 </template>

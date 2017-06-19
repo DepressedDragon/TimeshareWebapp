@@ -1,5 +1,5 @@
 #main {
-	margin-right: 250px;
+	margin-left: 250px;
 	margin-top: 60px;
 }
 
@@ -27,22 +27,28 @@
 }
 
 .sidebar {
-	margin-top: 60px;
-	height: 65.7%;
+	margin-top: 65px;
+	height: 80%;
 	width: 250px;
 	margin-bottom: 0;
 	top: 0;
-	right: 0;
+	left: 0;
 	position: absolute;
 	color: white;
 	background-color: grey;
+	border: 3px solid #282828;
+}
+
+.sidebar .textbox{
+	position: absolute;
+	top: 200px;
 }
 
 .block1 {
 	position: relative;
 	//background-color: pink;
 	//opacity: 0.9;
-	height: 130px;
+	height: 80px;
 	padding: 10px;
 	padding-top: 0px;
 
@@ -54,33 +60,64 @@
  	//opacity: 0.9;
  	height: 30px;
  	padding: 10px;
-
  	background-color: #4f6384;
  }
+
+ .block2:hover{
+ 	background-color: #6b85af
+ }
+
  .block3 {
  	position: relative;
  	//background-color: blue;
  	//opacity: 0.9;
- 	height: 230px;
+ 	height: 130px;
  	padding: 10px;
  }
+
  .block4 {
  	position: relative;
  	//background-color: green;
  	//opacity: 0.9;
  	height: 30px;
  	padding: 10px;
-
  	background-color: #4f6384;
 
  }
+
+.block4:hover{
+	background-color: #6b85af
+}
+
  .block5 {
  	position: relative;
  	//background-color: yellow;
  	//opacity: 0.9;
- 	height: 50px;
+ 	height: 70px;
  	padding: 10px;
  }
+
+ .block5 h5 {
+ 	border: 3px solid #282828;
+ 	border-radius: 5px;
+ 	padding: 5px;
+ 	background: #4f6384;
+ }
+
+.block5 h5:hover {
+ 	background-color: #6b85af;
+ 	
+ }
+
+ .block6 {
+ 	position: relative;
+ 	background-color: #109379;
+ 	opacity: 0.9;
+ 	height: 200px;
+ 	padding: 10px;
+ 	border-top: 3px solid #282828;
+ }
+
 
 
 .overlay {

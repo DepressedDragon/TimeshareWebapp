@@ -74,14 +74,20 @@ var isSelectable = new ReactiveVar(false); //making selectability false to start
 Template.calendarPage.helpers({
 	'stopSelectable': function(){
 		isSelectable = false;
-	}
+	},
 })
 
 Template.bookingPage.helpers({
-
 	'makeSelectable': function(){
 		isSelectable = true;	
-	},
+	}
+})
+
+Template.calendarPage.events({
+	'click .makeABooking': function(){ //Make a booking button page redirect
+		console.log('pressed!')
+		Router.go('/booking')
+	}
 })
 
 Template.calendar.helpers({
@@ -242,31 +248,115 @@ Template.calendar.helpers({
 		}
 	},
 
+	'getUsersOwnBookings': function(){
+		//Getting usersOwnBooking dates for unqiue dates display
+		var usersAccount = Meteor.users.findOne({'_id': Meteor.userId()})
+		if (usersAccount != undefined) { //Making the client wait until usersAccount is available to proceed
+			var usersBookingObjectsArray = usersAccount.bookings;
+			var usersBookings = []
+			var currMonth = Session.get('month')
+			var currYear = Session.get('year')
+
+			//Getting the respective year(s) and month(s) for the displayed year/month on the calendar (only getting applicable information)
+			for (var i = 0; i <= usersBookingObjectsArray.length - 1; i++) {
+				var booking = usersBookingObjectsArray[i]
+				if (booking.year1 == currYear || booking.year2 == currYear) {
+					if (booking.month1 == currMonth || booking.month2 == currMonth) {
+						usersBookings.push(booking.bookedDates)
+					}
+				}
+			}
+		}
+
+		//Categorizing users booked Dates
+		var usersArrDates = []
+		var usersDepDates = []
+		var usersRegDates = []
+		var usersDuelDates = []
+
+		if (usersBookings != undefined) { //making program wait for session update
+			//Accessing 2D list of unique users own bookings to check if this booked date is one of the users own booked dates
+			for (i = 0; i <= usersBookings.length - 1; i++){ //Getting individual booking
+				for (j = 0; j <= usersBookings[i].length - 1; j++){ //Getting individual day OF individual booking
+					
+					var thisDate = usersBookings[i][j];
+					
+					//Adding correct userBookedDates to respective arrays
+					if (j == 0) { //Arr date
+						usersArrDates.push(thisDate.valueOf())						
+					}
+					else if (j == usersBookings[i].length - 1) { //Dep date
+						usersDepDates.push(thisDate.valueOf())
+					}
+					else {
+						usersRegDates.push(thisDate.valueOf()) //Reg in-between date
+					}
+				}
+			}		
+
+			//Getting all users DUEL booked dates
+			for (a = 0; a <= usersArrDates.length - 1; a++){
+				var arrDateValue = usersArrDates[a].valueOf()
+				
+				for (b = 0; b <= usersDepDates.length - 1; b++) {
+					var depDateValue = usersDepDates[b].valueOf()
+
+					if (arrDateValue == depDateValue) { //If the user has an an arr and dep date on the same day
+						usersDuelDates.push(usersArrDates[a].valueOf()) //Adding this value to duel array
+					}
+				}
+			}
+
+			//removing the duel dates from arr and dep arrays
+			for (c = 0; c <= usersDuelDates.length - 1; c++){
+				arrIndex = usersArrDates.indexOf(usersDuelDates[c].valueOf())
+				if (arrIndex != -1){
+					usersArrDates.splice(arrIndex, 1) //go to arrIndex in the list, and remove 1 item
+				}
+				
+				depIndex = usersDepDates.indexOf(usersDuelDates[c].valueOf())
+				if (depIndex != -1) {
+					usersDepDates.splice(depIndex, 1) //go to depIndex in the list, and remove 1 item
+				}
+				
+			}
+			//Setting all users unique booked dates to session variables
+			Session.set({
+				'usersArrDates': usersArrDates,
+				'usersDepDates': usersDepDates,
+				'usersRegDates': usersRegDates,
+				'usersDuelDates': usersDuelDates
+			})
+		}
+	},
+
 	'usersOwnBookings': function(){
 		var thisDay = Number(this)
 		if (isNaN(thisDay) == false) {
 			var thisDate = new Date(Session.get('year'), Session.get('month'), thisDay)
-			var usersBookings = Session.get('usersBookings')
-	
-			if (usersBookings != undefined) { //making program wait for session update
-				//Accessing 2D list of unique users own bookings to check if this booked date is one of the users own booked dates
-				for (i = 0; i <= usersBookings.length - 1; i++){ //Getting individual booking
-					for (j = 0; j <= usersBookings[i].length - 1; j++){ //Getting individual day OF individual booking
-						if (usersBookings[i][j].getTime() == thisDate.getTime()){ //Comparing Date() objects
-							//Check if arr, dep, duel, or reg.
-							if (j == 0) { //Arr date
-								return "arrUserOwnBooking"
-								//TODO: ***Make and array that containes all of the special dates that were used, as ARR or DEP only, and check to see if the next date is already in this list. If this is the case, then change the return on this date to duel
-							}
-							else if (j == usersBookings[i].length - 1) { //Dep date
-								return "depUserOwnBooking"
-							}
-							else {
-								return "regUserOwnBooking" //Reg in-between date
-							}
-						}
-					}
-				}	
+			
+			var usersArrDates = Session.get('usersArrDates')
+			var usersDepDates = Session.get('usersDepDates')
+			var usersRegDates = Session.get('usersRegDates')
+			var usersDuelDates = Session.get('usersDuelDates')
+			
+			if (usersArrDates != undefined && usersDepDates != undefined && usersRegDates != undefined && usersDuelDates != undefined) {
+				//Displaying all users unique booked dates
+				if (usersArrDates.indexOf(thisDate.valueOf()) != -1){
+					return 'arrUserOwnBooking'
+				}
+				else if (usersDepDates.indexOf(thisDate.valueOf()) != -1){
+					return 'depUserOwnBooking'
+				}
+				else if (usersRegDates.indexOf(thisDate.valueOf()) != -1){
+					return 'regUserOwnBooking'
+				}
+				else if (usersDuelDates.indexOf(thisDate.valueOf()) != -1){
+					return 'duelUserOwnBooking'
+				}
+				else {
+					//console.log('This day is not user booked! Displaying nothing!')
+				}
 			}
 		}
 	}  
@@ -334,17 +424,15 @@ Template.calendar.events({
 					//This date is someone elses departure date, so it is selectable as an arrival date.
 					selectThisDay(selectedDay);
 				}
-				/* Not Needed as user does not click to select dep date. 
-				else if (bookedDay.arr == true && bookedDay.dep == false) {
-					//This date is someone elses arrival date, so it is selectable, but only as an departure date
-					console.log("selectable, but as dep date only!")
-					if (Session.get('currentlyFindingArr') == 'dep') {
-						selectThisDay(selectedDay)
-					}
-					else{console.log("This is someone elses arrival date. You can only set this as a departure date!")}
-				} */ 
 				else {
-					console.log('This date is unavailable as an arrival date!')
+					//Error Message
+					var message = 'This date is unavailable as an arrival date!'
+					Session.set('errorState', true)
+					Session.set('errorMessage', message)
+
+					//reseting error state again to hide error message after 5 seconds
+					setTimeout( function() {Session.set('errorState', false) }, 5000); 
+					 
 				}
 			}
 		}

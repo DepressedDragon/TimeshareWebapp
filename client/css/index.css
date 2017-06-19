@@ -1,0 +1,15 @@
+.errorDisplayBar{
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 20px;
+	background-color: navy;
+	z-index: 10000000;
+}
+
+.errorDisplayBar p {
+	text-align: center;
+	line-height: 0;
+	color: white !important;
+}
+

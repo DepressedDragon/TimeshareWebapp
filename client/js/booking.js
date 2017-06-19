@@ -63,7 +63,6 @@ Session.set({ //Starting display settings
 
 
 Template.bookingPage.helpers({
-
 	'getArrDate': function(){return Session.get('arrDate')},
 	'getDepDate': function(){return Session.get('depDate')},
 
@@ -87,18 +86,28 @@ Template.bookingPage.helpers({
 Template.bookingPage.events({
 	
 	'click .next1': function() { 
-		arrDate = Session.get('arrDate')
-		if(arrDate ) //TODO: Finish this to make it so that you must have selected an arr date before proceeding
-			//ALSO add a currentlyFindingNumOfNights Session Variable like the one below, and set to true here. 
-		Session.set('currentlyFindingArr', false);
-		Session.get('currentlyFindingNumOfNights', true)
-		Session.set({
-			'arrState': 'overlay',
-			'next1State': 'overlay',
-			'depState': 'display',
-			'next2State': 'display',
-			'endState': 'overlay'
-		})
+		selectedDatesArray = Session.get('selectedDates')
+		if(selectedDatesArray[0] != undefined) { //Prevent users from going through until they have selected an arr date
+			
+			Session.set('currentlyFindingArr', false);
+			Session.get('currentlyFindingNumOfNights', true)
+			Session.set({
+				'arrState': 'overlay',
+				'next1State': 'overlay',
+				'depState': 'display',
+				'next2State': 'display',
+				'endState': 'overlay'
+			})
+		}
+		else {
+			//Error Message
+			var message = 'Please select an arrival date before continuing'
+			Session.set('errorState', true)
+			Session.set('errorMessage', message)
+					
+			//reseting error state again to hide error message after 5 seconds
+			setTimeout( function() {Session.set('errorState', false) }, 5000);
+		}
 	},
 
 	'submit .numOfNights': function(event){
@@ -121,36 +130,12 @@ Template.bookingPage.events({
 				selectedDatesArray.push(newDate); 
 			}
 
-			//Simply for printing for log
+			/*//Printing for log 
 			for (i = 0; i <= selectedDatesArray.length-1; i++) {
 				thisDate = selectedDatesArray[i]
 				console.log(thisDate.getDate() + "/" + thisDate.getMonth() + "/" + thisDate.getFullYear())
 				if (i == 0){console.log("added Dates:")}
-			}
-
-			
-			//Preform checks to make sure that these dates do not interfere with already booked dates. 
-			/*	
-			var arrivalDate = selectedDatesArray[0]
-			
-			var thisMonth = arrivalDate.getMonth()
-			var nextMonth;
-			if (thisMonth == 11) {nextMonth = 0} 
-			else {nextMonth = thisMonth + 1}
-
-			var evaluationMonths = [thisMonth, nextMonth]
-			var evaluationYears = [arrivalDate.getFullYear(), arrivalDate.getFullYear()+1]
-			console.log(evaluationMonths)
-			console.log(evaluationYears)
-			
-
-			var unavailableDatesCursor = bookedDates.find({
-				month: { $in: evaluationMonths}, 
-				year: { $in: evaluationYears}
-			})
-
-			console.log(unavailableDatesCursor.fetch())
-			*/
+			} */
 
 			//Dates Validity Check
 			var validityCheck = true; //Starting as valid
@@ -164,14 +149,14 @@ Template.bookingPage.events({
 			
 				if (doc != undefined) {//If the document exists in the collection..
 					if (i == 0 && doc.dep == true && doc.arr == false){
-						console.log('good as an arrival date!')
+						//console.log('good as an arrival date!')
 					}
 					else if (i == selectedDatesArray.length - 1 && doc.arr == true && doc.dep == false) {
-						console.log('good as a departure date!')
+						//console.log('good as a departure date!')
 					}
 					else { //If this does not meet either of the arr or dep special cases, this is an unavaialble date and therefore the selection is not valid. 
 						validityCheck = false; 
-						'Error: This is an overlapping date!'
+						//console.log('Error: This is an overlapping date!')
 					}
 				}
 			}
@@ -185,7 +170,13 @@ Template.bookingPage.events({
 				Session.set('depDate', selectedDateString) //Setting the date
 			}
 			else {
-				 console.log('Unvalid selection. Please select available (green) dates')
+				//Error Message
+				var message = 'Unvalid selection. Not enough available dates! Please select available (green) dates'
+				Session.set('errorState', true)
+				Session.set('errorMessage', message)
+					
+				//reseting error state again to hide error message after 5 seconds
+				setTimeout( function() {Session.set('errorState', false) }, 5000);
 			}
 
 			
@@ -193,17 +184,38 @@ Template.bookingPage.events({
 
 
 		}
-		else {console.log("Error: please enter a number between 1 and 14!")}
+		else {
+			//Error Message
+			var message = 'Please enter a number between 1 and 14'
+			Session.set('errorState', true)
+			Session.set('errorMessage', message)
+					
+			//reseting error state again to hide error message after 5 seconds
+			setTimeout( function() {Session.set('errorState', false) }, 5000);
+		}
 	},
 
 	'click .next2': function(){
-		Session.set({
-			'arrState': 'overlay',
-			'next1State': 'overlay',
-			'depState': 'overlay',
-			'next2State': 'overlay',
-			'endState': 'display'
-		})
+		selectedDatesArray = Session.get('selectedDates')
+		if (selectedDatesArray.length > 1) { //Prevent users from going through until they have selected an arr date
+
+			Session.set({
+				'arrState': 'overlay',
+				'next1State': 'overlay',
+				'depState': 'overlay',
+				'next2State': 'overlay',
+				'endState': 'display'
+			})
+		}
+		else {
+			//Error Message
+			var message = 'Please enter the number of nights you wish to stay before continuing'
+			Session.set('errorState', true)
+			Session.set('errorMessage', message)
+					
+			//reseting error state again to hide error message after 5 seconds
+			setTimeout( function() {Session.set('errorState', false) }, 5000);
+		}
 	},
 
 	'click .proceed': function(){

@@ -35,13 +35,6 @@ Template.confirmationPage.events({
 				}
 			}
 		}
-		/*
-		console.log('here they are!')
-		console.log(month1)
-		console.log(month2)
-		console.log(year1)
-		console.log(year2)
-		*/
 
 		Meteor.call('addBooking', documentName, datesArray, month1, month2, year1, year2) //Calling serverside method to complete the FINAL booking
 		console.log('Booking Completed! Thank you!')
