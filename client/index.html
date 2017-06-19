@@ -46,14 +46,17 @@
             <li><a>{{>loginButtons}}</a></li>
           </ul>
         </div><!--/.nav-collapse -->
-      </div>
-    </div>
-  
-    {{#if errorDisplay}}
+
+        {{#if errorDisplay}}
 		<div class = "errorDisplayBar">
 			<p>{{getErrorMessage}}</p>
 		</div>
-	{{/if}}
+		{{/if}}
+
+      </div>
+    </div>
+  
+    
 	
 	
 </template>
