@@ -28,7 +28,7 @@
 
 .sidebar {
 	margin-top: 65px;
-	height: 100%;
+	height: 80%;
 	width: 250px;
 	margin-bottom: 0;
 	top: 0;
@@ -88,7 +88,7 @@
  	background-color: #4f6384;
 
  }
-  .block2 .next2 {
+  .block4 .next2 {
  	padding: 10px;
  	padding-bottom: 0px;
  	width: 100%;
@@ -120,9 +120,9 @@
 
  .block6 {
  	position: relative;
- 	background-color: #109379;
+ 	background-color: #4f6384;
  	opacity: 0.9;
- 	height: 200px;
+ 	height: 100%;
  	padding: 10px;
  	border-top: 3px solid #282828;
  }

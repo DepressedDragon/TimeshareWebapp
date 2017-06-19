@@ -84,7 +84,7 @@ Template.bookingPage.helpers({
 })
 
 Template.calendarPage.events({
-	'click .makeABooking': function(){ //Make a booking button page redirect
+	'click .makeABooking .textbox': function(){ //Make a booking button page redirect
 		console.log('pressed!')
 		Router.go('/booking')
 	}

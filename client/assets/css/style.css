@@ -329,6 +329,7 @@ a:focus {
 
 	position:relative;
 	z-index: 100000000000;
+	min-width: 894px;
 }
 
 #footerwrap p {

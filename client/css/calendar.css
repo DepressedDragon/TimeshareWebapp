@@ -2,8 +2,13 @@
 ul {list-style-type: none;}
 body {font-family: Verdana,sans-serif;}
 
+.calendarContainer{
+    min-width: 644px;
+}
+
 /*Sidebar classes*/
 .makeABooking {
+    position: absolute;
     margin-top: 65px;
     height: 80%;
     width: 250px;
@@ -12,18 +17,18 @@ body {font-family: Verdana,sans-serif;}
     left: 0;
     position: absolute;
     background-color: grey;
-    border-right: 3px solid #282828;
+    border: 3px solid #282828;
 }
 
 
 
 .makeABooking .textbox {
+    position: absolute;
     background-color: #4f6384;
     width: 80%;
-    position: absolute;
-    top: 180px;
-    margin: 20px;
-    border: 3px solid darkgrey;
+    top: 35px;
+    margin: 25px;
+    border: 3px solid #282828;
     border-radius: 5px;
 }
 
@@ -35,6 +40,46 @@ body {font-family: Verdana,sans-serif;}
     font-size: 20px !important;
     color: white !important;
 }
+
+.legend {
+    position: absolute;
+    top: 200px;
+    background-color: #eee;
+    width: 80%;
+    margin: 25px;
+    padding-top: 20px;
+    text-align: center;
+    border: 3px solid dimgrey;
+    border-radius: 5px;
+
+
+}
+
+.usersOwnBox{
+    height: 40px;
+    width: 80%;
+    background-color: #4f6384;
+    margin: 10%;
+    opacity: 0.8;
+}
+
+.unavailableBox{
+    height: 40px;
+    width: 80%;
+    background-color: #BF3F3F;
+    margin: 10%;
+    opacity: 0.8;
+}
+
+.availableBox{
+    height: 40px;
+    width: 80%;
+    background-color: #3FBF41;
+    margin: 10%;
+    opacity: 0.8;
+}
+
+
  /*Calendar classes*/
 
 .month {
@@ -109,7 +154,7 @@ body {font-family: Verdana,sans-serif;}
 
 .days li {
     background: #3FBF41;
-    opacity: 0.6;
+    opacity: 0.8;
     padding: 20px;
     list-style-type: none;
     display: inline-block;
@@ -122,7 +167,7 @@ body {font-family: Verdana,sans-serif;}
 }
 
 .days li:hover {
-    opacity: 0.7;
+    opacity: 0.9;
 }
 .days .today {
     opacity: 1;
@@ -137,7 +182,7 @@ body {font-family: Verdana,sans-serif;}
 
 .days .regUserOwnBooking{
     background: #4f6384 !important;
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 .days .arrUserOwnBooking::before{
@@ -162,39 +207,45 @@ body {font-family: Verdana,sans-serif;}
 
 .days .duelUserOwnBooking {
     background: linear-gradient(to right, #4f6384 40%, #3FBF41 40%, #3FBF41 60%, #4f6384 60%) !important;
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 
 /*-------- Unavailable date backgrounds (red) --------*/
 .days .regUnavailable {
     background: #BF3F3F;
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 .days .arrUnavailable {
     //background: #ff7200;
     background: linear-gradient(to right, #3FBF41 60%, #BF3F3F 60%);
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 .days .depUnavailable {
     //background: #6b3000;
     background: linear-gradient(to right, #BF3F3F 40%, #3FBF41 40%);
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 .days .duelUnavailable {
     //background: #ff00cb;
     background: linear-gradient(to right, #BF3F3F 40%, #3FBF41 40%, #3FBF41 60%, #BF3F3F 60%);
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 
 /*-------- Selected (active) date border elements & pseudo elements (black) --------*/
 /*Regular date selection setting*/
-.days .regActive {
-    opacity: 0.6;
+.days .regActive::after {
+    content: "";
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    height:100%;
+    width:100%;
+    opacity:0.801;
     outline: 3px solid black;
 }
 
@@ -207,6 +258,7 @@ body {font-family: Verdana,sans-serif;}
     height:100%;
     width: 40%;
     outline: 3px solid black;
+    opacity:0.801;
 }
 
 /*Reg Dep date*/
@@ -218,6 +270,7 @@ body {font-family: Verdana,sans-serif;}
     height:100%;
     width: 40%;
     outline: 3px solid black;
+    opacity:0.801;
 }
 
 /*Arr date when on a booked Dep date*/
@@ -229,6 +282,7 @@ body {font-family: Verdana,sans-serif;}
     height:100%;
     width: 40%;
     outline: 3px solid black;
+    opacity:0.801;
 }
 
 /*Dep date when on a booked Arr date*/
@@ -240,6 +294,7 @@ body {font-family: Verdana,sans-serif;}
     height:100%;
     width: 40%;
     outline: 3px solid black;
+    opacity:0.801;
 }
 
 /* Add media queries for smaller screens */

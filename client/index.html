@@ -15,7 +15,9 @@
 <template name = "layout ">
 	<!-- Page Layout for entire webapp *see lib/routes.js* -->
 	{{>fixedNavbar}}
-		{{>yield}} <!-- iron:router inserts each page's respective template here --> 
+		<div class = 'page-wrap'>
+		{{>yield}} <!-- iron:router inserts each page's respective template here -->
+		</div> 
 	{{>footer}}
 </template>
 
@@ -25,7 +27,7 @@
 <template name = "fixedNavbar">
     
     <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-default navbar-fixed-top site-footer" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
