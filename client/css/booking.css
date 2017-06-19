@@ -4,7 +4,7 @@
 }
 
 .topper {
-	padding: 10px;
+	padding: 20px;
 	padding-bottom: 0px;
 }
 
@@ -28,7 +28,7 @@
 
 .sidebar {
 	margin-top: 65px;
-	height: 80%;
+	height: 100%;
 	width: 250px;
 	margin-bottom: 0;
 	top: 0;
@@ -59,8 +59,13 @@
  	//background-color: orange;
  	//opacity: 0.9;
  	height: 30px;
+  	background-color: #4f6384;
+ }
+
+ .block2 .next1{
  	padding: 10px;
- 	background-color: #4f6384;
+ 	padding-bottom: 0px;
+ 	width: 100%;
  }
 
  .block2:hover{
@@ -80,9 +85,13 @@
  	//background-color: green;
  	//opacity: 0.9;
  	height: 30px;
- 	padding: 10px;
  	background-color: #4f6384;
 
+ }
+  .block2 .next2 {
+ 	padding: 10px;
+ 	padding-bottom: 0px;
+ 	width: 100%;
  }
 
 .block4:hover{
