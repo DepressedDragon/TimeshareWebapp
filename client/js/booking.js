@@ -62,7 +62,7 @@ Session.set({ //Starting display settings
 
 
 
-Template.bookingPage.helpers({
+Template.bookingSidebar.helpers({
 	'getArrDate': function(){return Session.get('arrDate')},
 	'getDepDate': function(){return Session.get('depDate')},
 
@@ -83,7 +83,7 @@ Template.bookingPage.helpers({
 
 })
 
-Template.bookingPage.events({
+Template.bookingSidebar.events({
 	
 	'click .next1': function() { 
 		selectedDatesArray = Session.get('selectedDates')

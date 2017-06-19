@@ -4,13 +4,14 @@ body {font-family: Verdana,sans-serif;}
 
 .calendarContainer{
     min-width: 644px;
+    min-height: 650px;
 }
 
 /*Sidebar classes*/
 .makeABooking {
     position: absolute;
     margin-top: 65px;
-    height: 80%;
+    height: 100%;
     width: 250px;
     margin-bottom: 0;
     top: 0;
@@ -43,7 +44,7 @@ body {font-family: Verdana,sans-serif;}
 
 .legend {
     position: absolute;
-    top: 200px;
+    top: 150px;
     background-color: #eee;
     width: 80%;
     margin: 25px;

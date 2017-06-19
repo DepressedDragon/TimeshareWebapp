@@ -28,7 +28,7 @@
 
 .sidebar {
 	margin-top: 65px;
-	height: 80%;
+	height: inherit;
 	width: 250px;
 	margin-bottom: 0;
 	top: 0;
@@ -120,9 +120,10 @@
 
  .block6 {
  	position: relative;
+ 	bottom: 0;
  	background-color: #4f6384;
  	opacity: 0.9;
- 	height: 100%;
+ 	height: auto;
  	padding: 10px;
  	border-top: 3px solid #282828;
  }
