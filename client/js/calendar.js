@@ -70,6 +70,7 @@ var selectedDatesArray = [];
 Session.set('selectedDates', selectedDatesArray) 
 
 var isSelectable = new ReactiveVar(false); //making selectability false to start
+var finalDisplay = new ReactiveVar(false); 
 
 Template.calendarPage.helpers({
 	'stopSelectable': function(){
@@ -81,6 +82,12 @@ Template.bookingSidebar.helpers({
 	'makeSelectable': function(){
 		isSelectable = true;	
 	}
+})
+
+Template.checkoutPage.helpers({
+	'stopSelectable': function(){
+		isSelectable = false;
+	},
 })
 
 Template.calendarPage.events({

@@ -59,7 +59,7 @@
 		{{getUnavailableDates}} <!--Calling this only once to build the new array.-->
 		{{getUsersOwnBookings}}
 		{{#each numOfDays}}
-		  <li class="day {{spacer}} {{today}} {{availability}} {{usersOwnBookings}}"> {{this}} </li> 
+		  <li class="day {{spacer}} {{today}} {{availability}} {{highlightSelectedDate}} {{usersOwnBookings}}"> {{this}} </li> 
 		{{/each}}
 		</ul>
 

@@ -1,12 +1,20 @@
 Meteor.subscribe('userData');
 
-Template.confirmationPage.helpers({
+Template.checkoutPage.helpers({
+
 	'getArrDate': function(){return Session.get('arrDate')},
 	'getNumOfNights': function(){return Session.get('numOfNights')},
 	'getDepDate': function(){return Session.get('depDate')},
+	'getTotalCost': function(){
+		//Calculating total cost of booking
+		var numOfNights = Session.get('numOfNights')
+		var totalCost = numOfNights * 40 //$40 Flat rate/night
+
+		return "$" + totalCost + ".00 CAD"
+	}
 })
 
-Template.confirmationPage.events({
+Template.checkoutPage.events({
 	'click .bookNowBox': function(e){
 		//Complete Add a document to the users account in the Meteor.users() db.
 		//Add all of the dates in the selectedDatesList to the unavailableDates db.
@@ -50,7 +58,7 @@ Template.confirmationPage.events({
 		}
 		
 		var numOfNights = Session.get('numOfNights')
-		var cost = numOfNights * 4000 //$40 Flat rate/night
+		var cost = numOfNights * 4000 //$40 Flat rate/night (stripe uses cents)
 		var desc = numberToWord(numOfNights) + ' night(s) - $' + 40*numOfNights 
 
       	e.preventDefault();

@@ -190,9 +190,9 @@ body {font-family: Verdana,sans-serif;}
     content: "";
     position: absolute; 
     bottom: 0; 
-    left: 60%; 
+    left: 59%; 
     height:100%;
-    width: 40%;
+    width: 41%;
     background: #4f6384;
 }
 
@@ -202,7 +202,7 @@ body {font-family: Verdana,sans-serif;}
     bottom: 0; 
     left: 0%; 
     height:100%;
-    width: 40%;
+    width: 41%;
     background: #4f6384;
 }
 

@@ -220,6 +220,6 @@ Template.bookingSidebar.events({
 
 	'click .proceed': function(){
 		console.log("Going to the next page!")
-		Router.go("/confirmation")
+		Router.go("/checkout")
 	}
 })

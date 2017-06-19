@@ -1,0 +1,68 @@
+.bookNowBox {
+	position: absolute;
+	padding-top: 60px;
+	top: 400px;
+	left: 0;
+	height: 250px;
+	width: 250px;
+	background-color: #4f6384;
+}
+/*---------------------*/
+#mainCheckout{
+	margin-right: 700px;
+	margin-top: 150px;
+	margin-bottom: 86px;
+	background-color:gray;
+}
+
+
+.checkoutInformation {
+	position: relative;
+
+	height: 100%;
+	width: 100%;
+	background-color: grey;
+	padding: 30px;
+	min-height: 625px;
+
+}
+
+.checkoutTextContainer {
+	margin: auto;
+	height: 80%;
+	width: 80%;
+	background-color:lightgrey;
+}
+
+
+.staticCalendarBox{
+	position: absolute;
+	top:70px;
+	right: 0;
+	width: 700px;
+	border: 10px solid black;
+	opacity: 0.8;
+
+}
+
+.calOverlay {
+	position: absolute;
+	height:67%;
+	width:100%;
+	top:196px;
+	right:0;
+	z-index: 20;
+
+	
+	background-color:black;
+	opacity: 0.1;
+}
+
+.filler {
+	position: relative;
+	top: 100px;
+	width: 100px;
+	height: 100px;
+	background-color: red;
+}
+
