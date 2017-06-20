@@ -1,8 +1,9 @@
 <template name = 'bookingPage'>
 
 	<div id="main"> 
-		{{>bookingSidebar}}
 		{{makeSelectable}} <!--Ensuring the calendar is selectable on this page since it should now be interactive -->
+		{{>bookingSidebar}}
+		
 		{{>calendar}} <!-- same calendar, but isSelectable state is now true -->
 	</div> 
 </template>

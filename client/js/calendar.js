@@ -78,9 +78,10 @@ Template.calendarPage.helpers({
 	},
 })
 
-Template.bookingSidebar.helpers({
+Template.bookingPage.helpers({
 	'makeSelectable': function(){
-		isSelectable = true;	
+		isSelectable = true;
+		console.log('should be selectedable!')	
 	}
 })
 

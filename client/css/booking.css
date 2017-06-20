@@ -28,7 +28,7 @@
 
 .sidebar {
 	margin-top: 65px;
-	height: inherit;
+	height: 100%;
 	width: 250px;
 	margin-bottom: 0;
 	top: 0;

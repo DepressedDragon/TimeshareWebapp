@@ -1,5 +1,8 @@
 Meteor.subscribe('userData');
 
+Session.set('payNowState', 'display')
+Session.set('bookNowState', 'overlay')
+
 Template.checkoutPage.helpers({
 
 	'getArrDate': function(){return Session.get('arrDate')},
@@ -11,11 +14,48 @@ Template.checkoutPage.helpers({
 		var totalCost = numOfNights * 40 //$40 Flat rate/night
 
 		return "$" + totalCost + ".00 CAD"
-	}
+	},
+
+	'payNowState': function(){return Session.get('payNowState')},
+	'bookNowState': function(){return Session.get('bookNowState')}
 })
 
 Template.checkoutPage.events({
-	'click .bookNowBox': function(e){
+	'click .payNowButton': function(e) {
+		Session.set('payNowState', 'overlay')
+		setTimeout( function() {Session.set('bookNowState', 'display')}, 5000); //Delay to wait for the Stripe dialogue box to pop up
+
+		//Stripe payment dialog box code
+		function numberToWord(num){
+			var numberWords = [
+			'One','Two','Three','Four','Five','Six','Seven',
+			'Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen'
+			];
+			return numberWords[num - 1]
+		}
+		
+		var numOfNights = Session.get('numOfNights')
+		var cost = numOfNights * 4000 //$40 Flat rate/night (stripe uses cents)
+		var desc = numberToWord(numOfNights) + ' night(s) - $' + 40*numOfNights 
+
+      	e.preventDefault();
+
+      	StripeCheckout.open({
+	        key: 'pk_test_dYxemQdfb6WJxKWHakXhYPBV',
+	        amount: cost, 
+	        name: 'Cottage booking',
+	        description: desc,
+	        panelLabel: 'Continue now!',
+	        token: function(res) {
+	          	stripeToken = res.id;
+	          	console.info(res);
+	          	Meteor.call('chargeCard', stripeToken);
+	        }
+      	});
+	},
+
+
+	'click .bookNowButton': function(){
 		//Complete Add a document to the users account in the Meteor.users() db.
 		//Add all of the dates in the selectedDatesList to the unavailableDates db.
 
@@ -46,35 +86,11 @@ Template.checkoutPage.events({
 
 		Meteor.call('addBooking', documentName, datesArray, month1, month2, year1, year2) //Calling serverside method to complete the FINAL booking
 		console.log('Booking Completed! Thank you!')
-		//TODO: redirect to home page
 		
-		//******* Stripe payment dialog box code goes here *******
-		function numberToWord(num){
-			var numberWords = [
-			'One','Two','Three','Four','Five','Six','Seven',
-			'Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen'
-			];
-			return numberWords[num - 1]
-		}
+		//Going to next page
+		Router.go('/confirmation')
 		
-		var numOfNights = Session.get('numOfNights')
-		var cost = numOfNights * 4000 //$40 Flat rate/night (stripe uses cents)
-		var desc = numberToWord(numOfNights) + ' night(s) - $' + 40*numOfNights 
-
-      	e.preventDefault();
-
-      	StripeCheckout.open({
-	        key: 'pk_test_dYxemQdfb6WJxKWHakXhYPBV',
-	        amount: cost, 
-	        name: 'Cottage booking',
-	        description: desc,
-	        panelLabel: 'Book now!',
-	        token: function(res) {
-	          	stripeToken = res.id;
-	          	console.info(res);
-	          	Meteor.call('chargeCard', stripeToken);
-	        }
-      	});
+		
     
 	  
 		

@@ -1,0 +1,44 @@
+.confirmationBackground{
+	height: 100%;
+	width: 100%;
+}
+
+.confirmationBox{
+	position: relative;
+	top: 200px;
+	height: 250px;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color:#4f6384;
+	border: 3px solid #303030;
+	border-radius: 5px;
+	padding: 30px;
+	color:white !important;
+
+}
+
+.confirmationBox p{
+	color:white !important;
+	font-size: 20px;
+}
+
+.confirmationBox p {
+	margin-left: auto;
+	margin-right: auto;
+	color:white !important;
+	font-size: 20px;
+}
+
+.goHomeButton{
+	margin: auto;
+	height: 50px;
+	width: 120px;
+	background-color: grey;
+	border: 3px solid #303030;
+	border-radius: 3px;
+}
+
+.goHomeButton:hover{
+	background-color: darkgray;
+}
