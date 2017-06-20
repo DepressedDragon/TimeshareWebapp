@@ -264,7 +264,6 @@ Thumbnails
 	background: url(images/placeholder.jpg) no-repeat top center;
     background-size: cover;
     height: 100%;
-
 }
 
 #intro.intro {
@@ -370,7 +369,7 @@ footer p {
 footer {
     background-color: #384452;
 }
-/*#footerwrap {
+#footerwrap {
 	padding-top: 50px;
 	padding-bottom: 50px;
 	background: #384452;
@@ -397,7 +396,7 @@ footer {
 
 #footerwrap i:hover {
 	color: #00b3fe
-}*/
+}
 
 /*	################################################################
 	PAGE CONFIGURATIONS
