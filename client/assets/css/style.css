@@ -72,7 +72,7 @@ a:focus {
 }
 
 /*	################################################################
-	BOOTSTRAP MODIFICATIONS & TWEAKS
+	Navbar
 ################################################################# */
 .navbar {
 	min-height: 70px;
@@ -318,43 +318,6 @@ Thumbnails
     -moz-transition-duration: 1s;
 }
 
-
-
-
-/* Background images are set within the HTML using inline CSS, not here 
-.fill {
-    width: 100%;
-    height: 100%;
-    background-position: center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-}
-
-
-#headerwrap {
-	background-color: #00b3fe;
-	min-height: 550px;
-	padding-top: 100px;
-	padding-bottom: 0px;
-	text-align: center;
-}
-
-#headerwrap h3, h5 {
-	color: white;
-	font-weight: 400;
-}
-
-#headerwrap h1 {
-	color: white;
-	margin-bottom: 25px;
-}
-
-#headerwrap .img-responsive {
-	margin: 0 auto;
-}
-*/
 
 /* Footer */
 footer {
