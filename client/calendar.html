@@ -1,8 +1,29 @@
 <template name = 'calendarPage'> 
-<p> Welcome to the calendar page!</p>
-{{stopSelectable}} <!--Ensuring the calendar is not selectable on this page since it should be relatively static; view only. -->
-{{>calendar}}
-<button type="button" class="book"><a href='/booking'>Book a Stay!</a></button> <!--Make this button link to --> 
+	<div id="main">
+		{{stopSelectable}} <!--Ensuring the calendar is not selectable on this page since it should be relatively static; view only. -->
+		{{>calendar}}
+		<div class="makeABooking">
+			<div class="textbox text-center unselectable">
+				<p>Click here to make a booking!</p>
+			</div>
+			<ul class = legend>
+				<li><b><u>Legend</u></b></li>
+				<li class = 'usersOwn'>
+					<div class = usersOwnBox></div>
+					<p>Your Booked Dates</p>
+				</li>
+				<li class = 'unavailable'>
+					<div class = unavailableBox></div>
+						<p>Unavailable Dates</p>
+				</li>
+				<li class = 'available'>
+					<div class = availableBox></div>
+					<p>Available Dates</p>
+				</li>
+			</ul>
+			
+		</div>
+	</div>
 </Template>
 
 
@@ -10,47 +31,50 @@
 
 
 <Template name = "calendar">
-  <div class="month unselectable">      
-    <ul>
-      <li class="prev">&#10094;</li> <!--Simply getting arrow characters -->
-      <li class="next">&#10095;</li>
-      <li style="text-align:center">
-        {{month}}<br>
-        <span style="font-size:18px">{{year}}</span>
-      </li>
-    </ul>
-  </div>
+	<div class = "calendarContainer">
+	  <div class="month unselectable">      
+	    <ul>
+	      <li class="prev">&#10094;</li> <!--Simply getting arrow characters -->
+	      <li class="next">&#10095;</li>
+	      <li style="text-align:center">
+	        {{month}}<br>
+	        <span style="font-size:18px">{{year}}</span>
+	      </li>
+	    </ul>
+	  </div>
 
-  <ul class="weekdays unselectable">
-    <li>Su</li>
-    <li>Mo</li>
-    <li>Tu</li>
-    <li>We</li>
-    <li>Th</li>
-    <li>Fr</li>
-    <li>Sa</li>
-  </ul>
+	  <ul class="weekdays unselectable">
+	    <li>Su</li>
+	    <li>Mo</li>
+	    <li>Tu</li>
+	    <li>We</li>
+	    <li>Th</li>
+	    <li>Fr</li>
+	    <li>Sa</li>
+	  </ul>
 
-{{#unless isSelectable}} <!--#if isSelectable == false (#unless is simply the inverse of #if which checks for true) -->
-	
-	<ul class="days">
-	{{getUnavailableDates}} <!--Calling this only once to build the new array.-->
-	{{#each numOfDays}}
-	  <li class="day {{spacer}} {{today}} {{availability}}"> {{this}} </li> 
-	{{/each}}
-	</ul>
+	{{#unless isSelectable}} <!--#if isSelectable == false (#unless is simply the inverse of #if which checks for true) -->
+		
+		<ul class="days unselectable">
+		{{getUnavailableDates}} <!--Calling this only once to build the new array.-->
+		{{getUsersOwnBookings}}
+		{{#each numOfDays}}
+		  <li class="day {{spacer}} {{today}} {{availability}} {{highlightSelectedDate}} {{usersOwnBookings}}"> {{this}} </li> 
+		{{/each}}
+		</ul>
 
-{{else}}
-	
-	<ul class="days">
-	{{getUnavailableDates}} <!--Calling this only once to build the new array.-->
-	{{#each numOfDays}}
-	  <li class="day {{spacer}} {{today}} {{highlightSelectedDate}} {{availability}}"> {{this}} </li> 
-	{{/each}}
-	</ul>
+	{{else}}
+		
+		<ul class="days unselectable">
+		{{getUnavailableDates}} <!--Calling this only once to build the new array.-->
+		{{getUsersOwnBookings}}
+		{{#each numOfDays}}
+		  <li class="day {{spacer}} {{today}} {{highlightSelectedDate}} {{availability}} {{usersOwnBookings}}"> {{this}} </li> 
+		{{/each}}
+		</ul>
 
-{{/unless}}
-
+	{{/unless}}
+	</div>
 </template>
 
 

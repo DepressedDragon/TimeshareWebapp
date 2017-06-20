@@ -1,0 +1,40 @@
+.errorDisplayBar{
+	position: absolute;
+	left: 0;
+	width: 100%;
+	top: 70px;
+	background-color: navy;
+	z-index: 10000000;
+}
+
+.errorDisplayBar p {
+	text-align: center;
+	line-height: 0;
+	color: white !important;
+}
+
+
+* {
+  margin: 0;
+}
+html, body {
+  height: 100%;
+}
+.page-wrap {
+  min-height: 100%;
+  min-width: 894px;
+  background-color:#eee;
+  margin-top: -99px;
+  /* equal to footer height */
+  margin-bottom: -210px; 
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+.page-wrap:after {
+  height: 220px; 
+}
+.site-footer {
+}
+

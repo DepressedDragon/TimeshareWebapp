@@ -374,6 +374,10 @@ footer {
 	padding-top: 50px;
 	padding-bottom: 50px;
 	background: #384452;
+
+	position:relative;
+	z-index: 100000000000;
+	min-width: 894px;
 }
 
 #footerwrap p {

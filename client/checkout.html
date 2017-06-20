@@ -1,0 +1,39 @@
+<template name = "checkoutPage">
+	
+	<div id = 'mainCheckout'>
+		
+		<div class = checkoutInformation>
+			
+			<div class = 'checkoutTextContainer'>
+				<h3> Review your booking before its final</h3>
+				<hr>
+				<p>Arrival Date: <kbd>{{getArrDate}}</kbd></p>		
+				<p>Number of Nights Stay: <kbd>{{getNumOfNights}}</kbd></p>
+				<p>Departure Date: <kbd>{{getDepDate}}</kbd></p>
+				<p>Total Cost: <kbd>{{getTotalCost}}</kbd></p>
+			</div>
+
+			<div class = 'payNowButton text-center unselectable'>
+				<h1>Payment</h1>
+				<div class = {{payNowState}}></div>
+			</div>
+			<div class = 'bookNowButton text-center unselectable'>
+				<h1>Complete Booking</h1>
+				<div class = {{bookNowState}}></div>
+			</div>
+
+		</div>
+		
+		{{stopSelectable}}
+			<div class = 'staticCalendarBox'>
+			{{>calendar}}
+			<div class = 'calOverlay'></div>
+		</div> 
+
+	
+	</div>
+
+
+
+
+</template>

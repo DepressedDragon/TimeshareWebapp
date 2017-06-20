@@ -1,25 +1,147 @@
-
-
 #main {
+	margin-left: 250px;
+	margin-top: 150px;
+}
+
+.topper {
 	padding: 20px;
-	margin-right: 250px;
+	padding-bottom: 0px;
+}
+
+.block3 input{ /*Text input default*/
+
+	width: 50px;
+	height: 26px;
+	background-color: #1c1e21;
+	border: 2px solid lightgrey;
+	border-radius: 4px;
+
+}
+
+.block3 input:focus{ /*Text input when clicked on*/
+	border-color: #555;
+}
+
+.block3 button{
+	color: black;
 }
 
 .sidebar {
-	padding-top: 60px ;
+	margin-top: 65px;
 	height: 100%;
 	width: 250px;
+	margin-bottom: 0;
 	top: 0;
-	right: 0;
+	left: 0;
 	position: absolute;
 	color: white;
 	background-color: grey;
+	border: 3px solid #282828;
 }
 
-.greyOut {
-	background-color: red;
+.sidebar .textbox{
+	position: absolute;
+	top: 200px;
 }
 
+.block1 {
+	position: relative;
+	//background-color: pink;
+	//opacity: 0.9;
+	height: 80px;
+	padding: 10px;
+	padding-top: 0px;
+
+	//border: 2px solid magenta;
+}
+ .block2 {
+ 	position: relative;
+ 	//background-color: orange;
+ 	//opacity: 0.9;
+ 	height: 30px;
+  	background-color: #4f6384;
+ }
+
+ .block2 .next1{
+ 	padding: 10px;
+ 	padding-bottom: 0px;
+ 	width: 100%;
+ }
+
+ .block2:hover{
+ 	background-color: #6b85af
+ }
+
+ .block3 {
+ 	position: relative;
+ 	//background-color: blue;
+ 	//opacity: 0.9;
+ 	height: 130px;
+ 	padding: 10px;
+ }
+
+ .block4 {
+ 	position: relative;
+ 	//background-color: green;
+ 	//opacity: 0.9;
+ 	height: 30px;
+ 	background-color: #4f6384;
+
+ }
+  .block4 .next2 {
+ 	padding: 10px;
+ 	padding-bottom: 0px;
+ 	width: 100%;
+ }
+
+.block4:hover{
+	background-color: #6b85af
+}
+
+ .block5 {
+ 	position: relative;
+ 	//background-color: yellow;
+ 	//opacity: 0.9;
+ 	height: 70px;
+ 	padding: 10px;
+ }
+
+ .block5 h5 {
+ 	border: 3px solid #282828;
+ 	border-radius: 5px;
+ 	padding: 5px;
+ 	background: #4f6384;
+ }
+
+.block5 h5:hover {
+ 	background-color: #6b85af;
+ 	
+ }
+
+ .block6 {
+ 	position: relative;
+ 	bottom: 0;
+ 	background-color: #4f6384;
+ 	opacity: 0.9;
+ 	height: auto;
+ 	padding: 10px;
+ 	border-top: 3px solid #282828;
+ }
+
+
+
+.overlay {
+	position: absolute;
+	height:100%;
+	width:100%;
+	top:0;
+	right:0;
+	z-index: 20;
+
+	
+	background-color:black;
+	opacity: 0.8;
+}
 
 @media screen and (max-height: 450px) {
     .sidebar {padding-top: 15px;}

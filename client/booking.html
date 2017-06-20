@@ -1,47 +1,71 @@
 <template name = 'bookingPage'>
 
-<div id="main"> 
-	<p> Welcome to the booking page!</p>
-	{{makeSelectable}} <!--Ensuring the calendar is selectable on this page since it should now be interactive -->
-	{{>calendar}} <!-- same calendar, but isSelectable state is now true -->
-</div>
-<!-- Booking information layout goes here! -->
-<div class="sidebar">
-	<!-- Side bar-->
-	<div>
-	 	<h2>Please enter the dates you wish to book:</h2> 
-	 	<hr>
+	<div id="main"> 
+		{{makeSelectable}} <!--Ensuring the calendar is selectable on this page since it should now be interactive -->
+		{{>bookingSidebar}}
+		
+		{{>calendar}} <!-- same calendar, but isSelectable state is now true -->
+	</div> 
+</template>
+
+<template name = 'bookingSidebar'>
+	<!-- Booking information layout goes here! -->
+	<div class="sidebar">
+		<!-- Side bar-->
+		<div class="topper">
+		 	<h4 class="text-center"><b>Booking Information</b></h4> 
+		 	<hr>
+		</div>
+
+		<!--Block 1-->
+		<div class="block1">
+			<div>
+				<h4>Please <em>select</em> your <kbd>arrival</kbd> date on the calendar</h4>
+				{{setArrDate}} <!--Gets called each time the selected Date changes, and thus re-displays the new date-->
+			</div>
+			<div class="{{arrState}}"></div>
+		</div>	
+		<!--Block 2-->
+		<div class="block2" >
+			<div class="next1 text-center">
+				<b>&#65088;</b>
+			</div>
+			<div class="{{next1State}}"></div>
+		</div>
+		<!--Block 3-->
+		<div class="block3">
+			<div>
+				<h4>Please <em>enter</em> the number of <kbd>nights</kbd> you wish to stay</h4>
+				<form class=numOfNights>
+					<input name="numOfNights" input="text">
+					<button type="submit">Ok</button>
+				</form>
+			</div>
+			<div class="{{depState}}"></div>
+		</div>
+		<!--Block 4-->
+		<div class="block4">
+			<div class="next2 text-center">
+				<b>&#65088;</b>
+			</div>
+			<div class="{{next2State}}"></div>
+		</div>
+
+		<!--Block 5-->
+		<div class="block5">
+			<div>
+				<h5 class="proceed text-center">Proceed to confirmation page!</h5>
+			</div>
+			<div class="{{endState}}"></div>
+		</div>
+
+		<div class="block6">
+			<div>
+				<h4>Arrival Date: </h4>
+				<h4 class="text-center"><b><kbd>{{getArrDate}}</kbd></b></h4>
+				<h4>Departure Date: </h4>
+				<h4 class="text-center"><b><kbd>{{getDepDate}}</kbd></b></h4>
+			</div>
+		</div>
 	</div>
-
-
-	<div class="{{arrState}}">
-		<h3>Please select your arrival date on the calendar</h3>
-		{{setArrDate}} <!--Gets called each time the selected Date changes, and thus re-sets the date-->
-		<p class="text-center"><b>{{getArrDate}}</b></p>
-	</div>
-	
-	<div class="next1 {{next1State}}" style="text-align:center;">
-		<b>&#65088;</b>
-	</div>
-
-
-	<div class="{{depState}}">
-		<h3>Please enter the number of nights you wish to stay</h3>
-		<form class=numOfNights>
-			<input name="numOfNights" input="text">
-			<button type="submit">Ok</button>
-		</form>
-		<p>Departure Date: </p>
-		<p>{{getDepDate}}</p>
-	</div>
-
-	<div class="next2 {{next2State}}" style="text-align:center;">
-		<b>&#65088;</b>
-	</div>
-
-
-	<div class="{{endState}}">
-		<p>Proceed to payment page!</p>
-	</div>
-</div>
 </template>

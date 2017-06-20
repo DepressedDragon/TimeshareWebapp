@@ -2,6 +2,87 @@
 ul {list-style-type: none;}
 body {font-family: Verdana,sans-serif;}
 
+.calendarContainer{
+    min-width: 644px;
+    min-height: 650px;
+}
+
+/*Sidebar classes*/
+.makeABooking {
+    position: absolute;
+    margin-top: 65px;
+    height: 100%;
+    width: 250px;
+    margin-bottom: 0;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-color: grey;
+    border: 3px solid #282828;
+}
+
+
+
+.makeABooking .textbox {
+    position: absolute;
+    background-color: #4f6384;
+    width: 80%;
+    top: 35px;
+    margin: 25px;
+    border: 3px solid #282828;
+    border-radius: 5px;
+}
+
+.makeABooking .textbox:hover{
+    background-color: #6b85af;
+}
+
+.makeABooking .textbox p {
+    font-size: 20px !important;
+    color: white !important;
+}
+
+.legend {
+    position: absolute;
+    top: 150px;
+    background-color: #eee;
+    width: 80%;
+    margin: 25px;
+    padding-top: 20px;
+    text-align: center;
+    border: 3px solid dimgrey;
+    border-radius: 5px;
+
+
+}
+
+.usersOwnBox{
+    height: 40px;
+    width: 80%;
+    background-color: #4f6384;
+    margin: 10%;
+    opacity: 0.8;
+}
+
+.unavailableBox{
+    height: 40px;
+    width: 80%;
+    background-color: #BF3F3F;
+    margin: 10%;
+    opacity: 0.8;
+}
+
+.availableBox{
+    height: 40px;
+    width: 80%;
+    background-color: #3FBF41;
+    margin: 10%;
+    opacity: 0.8;
+}
+
+
+ /*Calendar classes*/
+
 .month {
     padding: 70px 25px;
     width: 100%;
@@ -28,12 +109,16 @@ body {font-family: Verdana,sans-serif;}
     padding-left: 50px;
     padding-right:50px;
     //background:blue;
+}
 
-
+.month .prev:hover{
+    color: black;
+    opacity: 0.7;
 }
 
 .month .next {
     float: right;
+    height: 100%;
     padding-top: 10px;
     display: block;
     padding: 20px;
@@ -42,10 +127,16 @@ body {font-family: Verdana,sans-serif;}
     //background:blue;
 }
 
+.month .next:hover{
+    color: black;
+    opacity: 0.7;
+}
+
 .weekdays {
     margin: 0;
     padding: 10px 0;
     background-color: #ddd;
+    padding-left: 20px;
 }
 
 .weekdays li {
@@ -59,11 +150,12 @@ body {font-family: Verdana,sans-serif;}
     padding: 20px 0;
     background: #eee;
     margin: 0;
+    padding-left: 20px;
 }
 
 .days li {
     background: #3FBF41;
-    opacity: 0.6;
+    opacity: 0.8;
     padding: 20px;
     list-style-type: none;
     display: inline-block;
@@ -72,46 +164,138 @@ body {font-family: Verdana,sans-serif;}
     margin-bottom: 5px;
     font-size:12px;
     color: white;
+    position: relative;
+}
+
+.days li:hover {
+    opacity: 0.9;
 }
 .days .today {
     opacity: 1;
 }
 
 .days .spacer {
-    opacity: 0;
-
+   visibility: hidden;
 }
 
+
+/*-------- Special users own unique bookings overlays --------*/
+
+.days .regUserOwnBooking{
+    background: #4f6384 !important;
+    opacity: 0.8;
+}
+
+.days .arrUserOwnBooking::before{
+    content: "";
+    position: absolute; 
+    bottom: 0; 
+    left: 59%; 
+    height:100%;
+    width: 41%;
+    background: #4f6384;
+}
+
+.days .depUserOwnBooking::before{
+    content: "";
+    position: absolute; 
+    bottom: 0; 
+    left: 0%; 
+    height:100%;
+    width: 41%;
+    background: #4f6384;
+}
+
+.days .duelUserOwnBooking {
+    background: linear-gradient(to right, #4f6384 40%, #3FBF41 40%, #3FBF41 60%, #4f6384 60%) !important;
+    opacity: 0.8;
+}
+
+
+/*-------- Unavailable date backgrounds (red) --------*/
 .days .regUnavailable {
     background: #BF3F3F;
-    opacity: 0.6;
-    color: white !important
+    opacity: 0.8;
 }
 
 .days .arrUnavailable {
-    background: #ff7200;
-    opacity: 0.6;
-    color: white !important
+    //background: #ff7200;
+    background: linear-gradient(to right, #3FBF41 60%, #BF3F3F 60%);
+    opacity: 0.8;
 }
 
 .days .depUnavailable {
-    background: #6b3000;
-    opacity: 0.6;
-    color: white !important
+    //background: #6b3000;
+    background: linear-gradient(to right, #BF3F3F 40%, #3FBF41 40%);
+    opacity: 0.8;
 }
 
 .days .duelUnavailable {
-    background: #ff00cb;
-    opacity: 0.6;
-    color: white !important
+    //background: #ff00cb;
+    background: linear-gradient(to right, #BF3F3F 40%, #3FBF41 40%, #3FBF41 60%, #BF3F3F 60%);
+    opacity: 0.8;
 }
 
-.days .active {
-    background: black;
-    opacity:0.6;
-    color: white !important
-    outline: 1px solid red;
 
+/*-------- Selected (active) date border elements & pseudo elements (black) --------*/
+/*Regular date selection setting*/
+.days .regActive::after {
+    content: "";
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    height:100%;
+    width:100%;
+    opacity:0.801;
+    outline: 3px solid black;
+}
+
+/*Reg Arr date*/
+.days .arrActive::after {
+    content: "";
+    position: absolute; 
+    bottom: 0; 
+    left: 60%; 
+    height:100%;
+    width: 40%;
+    outline: 3px solid black;
+    opacity:0.801;
+}
+
+/*Reg Dep date*/
+.days .depActive::after {
+    content: "";
+    position: absolute; 
+    bottom: 0; 
+    left: 0%; 
+    height:100%;
+    width: 40%;
+    outline: 3px solid black;
+    opacity:0.801;
+}
+
+/*Arr date when on a booked Dep date*/
+.days .arrActiveDepUnavailable::after {
+    content: "";
+    position: absolute; 
+    bottom: 0; 
+    left: 60%; 
+    height:100%;
+    width: 40%;
+    outline: 3px solid black;
+    opacity:0.801;
+}
+
+/*Dep date when on a booked Arr date*/
+.days .depActiveArrUnavailable::after {
+    content: "";
+    position: absolute; 
+    bottom: 0; 
+    left: 0%; 
+    height:100%;
+    width: 40%;
+    outline: 3px solid black;
+    opacity:0.801;
 }
 
 /* Add media queries for smaller screens */
