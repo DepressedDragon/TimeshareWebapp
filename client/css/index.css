@@ -21,20 +21,64 @@ html, body {
   height: 100%;
 }
 .page-wrap {
-  min-height: 100%;
+  //min-height: 100%;
   min-width: 894px;
   background-color:#eee;
   margin-top: -99px;
   /* equal to footer height */
-  margin-bottom: -210px; 
+  /*margin-bottom: -210px;*/
 }
+
+/*
 .page-wrap:after {
   content: "";
   display: block;
 }
 .page-wrap:after {
-  height: 220px; 
+  /*height: 220px;
 }
 .site-footer {
-}
+} */
+/*
+We guna make use of that? 
+of what?
+Do you need it?
+lemme see
 
+Can we take out the 20px and stick with this? Cuz if the sticky thing
+is working then thats good
+
+ok...wanna try it?
+
+It would probably work with my pages but I don't know how it would affect the 
+home page
+
+I believe that is what is pushing the margin out further causing that large white
+space on my pages
+and that is what is causing the min-page width on the home page to not shrink like you 
+want it too 
+
+So we could try removing those things, ditch the sticky footer, but keep the
+top -99px margin 
+ok
+lets comment 
+
+good poitn lol
+
+
+Originally I put it here to make the footer 'sticky' meaning that if the page
+content was shorter than 1 page, the footer would stick to the bottom of the page
+Now that the footer is like 20px, its not really needed anymore
+That margin is pretty integral to my pages not being stucbehind the h
+
+looks good? yep save and yeah kk
+
+hows that?
+
+much better but still look at this
+welcome to is pushed up...see it?
+
+I do
+Not exactly sure why
+lets look at the dev tools
+*/

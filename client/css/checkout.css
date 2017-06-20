@@ -2,7 +2,7 @@
 #mainCheckout{
 	margin-right: 700px;
 	margin-top: 150px;
-	margin-bottom: -100px;
+	//margin-bottom: -100px;
 	background-color:gray;
 }
 
@@ -14,7 +14,7 @@
 	width: 100%;
 	background-color: grey;
 	padding: 30px;
-	min-height: 800px;
+	min-height: 740px;
 
 }
 
@@ -88,6 +88,7 @@
 	width: 700px;
 	border: 10px solid #303030;
 	//opacity: 0.8;
+	margin-bottom: 100px;
 
 }
 
